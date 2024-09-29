@@ -1,0 +1,12 @@
+{
+  "name": "arcane-backend-v4",
+  "version": "1.0.0",
+  "description": "A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

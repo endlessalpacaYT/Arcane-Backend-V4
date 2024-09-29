@@ -4,7 +4,7 @@
 ## Project Stack: (Will Most Likely Change)
 - Language: TypeScript
 - Web Framework: Fastify (HTTP APIs), gRPC (Internal service communication)
-- Database: Cassandra (NoSQL), Redis (in-memory), PostgreSQL/MySQL (relational)
+- Database: Cassandra (NoSQL), Redis (in-memory), couchbase
 - Authentication: OAuth 2.0 or JWT-based
 - API Design: REST (public-facing), gRPC (internal communication)
 - Real-time Communication: WebSockets

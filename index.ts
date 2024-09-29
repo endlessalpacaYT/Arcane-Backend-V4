@@ -1,5 +1,4 @@
 import fastify from "fastify";
-import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 const app = fastify();
@@ -26,24 +25,6 @@ app.get('/', (request, reply) => {
         version: process.env.VERSION || "VERSION_NOT_FOUND"
     })
 })
-
-const pool = new Pool({
-    host: process.env.PG_HOST,
-    port: parseInt(process.env.PG_PORT || '5432', 10),
-    user: process.env.PG_USER,
-    password: process.env.PG_PASSWORD,
-    database: process.env.PG_DATABASE,
-});
-
-pool.on('connect', () => {
-    console.log(`PostgreSQL Connected To: ${process.env.PG_HOST}:${process.env.PG_PORT}`);
-});
-
-pool.on('error', (err) => {
-    console.error('Error Connecting To PostgreSQL: ' + err);
-});
-
-pool.connect()
 
 app.listen({ port: PORT }, (err, address) => {
     if (err) {

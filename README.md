@@ -1,6 +1,8 @@
 # Arcane-Backend-V4  
 ## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
 
+## ArcaneV4 is a rewrite of V3
+
 ## Project Stack: (Will Most Likely Change)
 - Language: Javascript
 - Web Framework: Fastify (HTTP APIs), gRPC (Internal service communication)
@@ -17,9 +19,9 @@
 - Data Storage: AWS S3 or Google Cloud Storage (If Ya Want!)
 
 ## Planned Features  
-- [ ] Login system  
-- [ ] Easy setup  
-- [ ] Database (Cassandra, PostgreSQL/MySQL)  
+- [x] Login system  
+- [x] Easy setup  
+- [x] Database (Cassandra, PostgreSQL/MySQL) (Partial) 
 - [ ] Redis caching for session management  
 - [ ] Auto shop (purchasing skins and items)  
 - [ ] Full Battle Pass integration  
@@ -28,8 +30,8 @@
 - [ ] XMPP  
 - [ ] Working MCP
 - [ ] NewsV2 (Fortnite in-game news system)  
-- [ ] Discord Bot Integration  
-- [ ] Matchmaker (matchmaking system)  
+- [x] Discord Bot Integration  
+- [x] Matchmaker (matchmaking system)  
 - [ ] Party V1 (basic party system)  
 - [ ] Party V2 (advanced party system with cross-play)  
 - [ ] Daily rewards system (login rewards)  
@@ -38,13 +40,13 @@
 - [ ] HWID Bans (hardware bans)  
 - [ ] Refunding system  
 - [ ] Frontend for managing backend  
-- [ ] Universal backend (multi-version support)  
-- [ ] API for external integrations  
-- [ ] Player inventory management  
+- [x] Universal backend (multi-version support)  
+- [x] API for external integrations  
+- [x] Player inventory management  
 - [ ] Seasonal events (Christmas, Halloween)  
 - [ ] Player stats tracking
 - [ ] RabbitMQ/Kafka for event-driven architecture  
-- [ ] WebSockets for real-time communication
+- [x] WebSockets for real-time communication
 
 ## Maybe Features?  
 - [ ] IP Bans (ban based on IP address) 
@@ -54,8 +56,8 @@
 - [ ] Tournament support
 
 ## Planned Bot Commands  
-- [ ] Register command (for creating new accounts)  
-- [ ] Ping command (for checking bot responsiveness)  
+- [x] Register command (for creating new accounts)  
+- [x] Ping command (for checking bot responsiveness)  
 - [ ] User lookup command (check user stats and profile)  
 - [ ] Ban management command (ban/unban users)  
 - [ ] Announcements command (send announcements to users)

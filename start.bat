@@ -1,2 +1,2 @@
-node dist/index.js
+node index.js
 pause

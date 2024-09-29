@@ -1,0 +1,9 @@
+# Server Settings
+PORT=3551
+
+# Database Settings
+PG_HOST=127.0.0.1
+PG_PORT=5432
+PG_USER=
+PG_PASSWORD=
+PG_DATABASE=arcanev4

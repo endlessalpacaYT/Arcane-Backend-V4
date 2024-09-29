@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/pg": "^8.11.10",
     "dotenv": "^16.4.5",
-    "fastify": "^5.0.0"
+    "fastify": "^5.0.0",
+    "pg": "^8.13.0"
   },
   "devDependencies": {
     "@types/node": "^22.7.4"

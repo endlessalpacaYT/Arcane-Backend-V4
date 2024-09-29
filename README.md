@@ -14,8 +14,7 @@
 - Event-Driven Architecture: Apache Kafka
 - Session Management: Redis (active sessions), Cassandra (long-term sessions)
 - Logging and Monitoring: ELK Stack (Elasticsearch, Logstash, Kibana)
-- Cloud Hosting: AWS or Google Cloud
-- Data Storage: AWS S3 or Google Cloud Storage
+- Data Storage: AWS S3 or Google Cloud Storage (If Ya Want!)
 
 ## Planned Features  
 - [ ] Login system  

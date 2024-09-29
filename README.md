@@ -2,9 +2,9 @@
 ## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
 
 ## Project Stack: (Will Most Likely Change)
-- Language: TypeScript
+- Language: Javascript
 - Web Framework: Fastify (HTTP APIs), gRPC (Internal service communication)
-- Database: Cassandra (NoSQL), Redis (in-memory), couchbase
+- Database: Cassandra (NoSQL), Redis (in-memory), MongoDB
 - Authentication: OAuth 2.0 or JWT-based
 - API Design: REST (public-facing), gRPC (internal communication)
 - Real-time Communication: WebSockets

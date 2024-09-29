@@ -1,5 +1,6 @@
 # Server Settings
 PORT=3551
+VERSION=
 
 # Database Settings
 PG_HOST=127.0.0.1

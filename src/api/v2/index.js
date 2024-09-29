@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
 
 app.get('/backend', (req, res) => {
     res.json({
-        backend: "ArcaneBackendV3",
-        version: "v0.27",
+        backend: "ArcaneBackendV4",
+        version: "v0.01",
         started: Date.now()
     })
 })

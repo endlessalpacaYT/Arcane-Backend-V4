@@ -112,7 +112,7 @@ async function initDB() {
 async function startMain() {
     try {
         await fastify.listen({ port: PORT, host: IP });
-        console.log('ArcaneV3 is running on http://localhost:' + PORT);
+        console.log('ArcaneV4 is running on http://localhost:' + PORT);
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);
@@ -120,7 +120,7 @@ async function startMain() {
 }
 
 function startBackend() {
-    console.log("ArcaneV3 Is Starting");
+    console.log("ArcaneV4 Is Starting");
     startMain();
     initDB();
     require("./src/discord/index.js");

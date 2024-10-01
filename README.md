@@ -19,9 +19,9 @@
 - Data Storage: AWS S3 or Google Cloud Storage (If Ya Want!)
 
 ## Planned Features  
-- [x] Login system  
-- [x] Easy setup  
-- [x] Database (Cassandra, PostgreSQL/MySQL) (Partial) 
+- [ ] Login system  
+- [ ] Easy setup  
+- [ ] Database (Cassandra, PostgreSQL/MySQL) 
 - [ ] Redis caching for session management  
 - [ ] Auto shop (purchasing skins and items)  
 - [ ] Full Battle Pass integration  
@@ -30,8 +30,8 @@
 - [ ] XMPP  
 - [ ] Working MCP
 - [ ] NewsV2 (Fortnite in-game news system)  
-- [x] Discord Bot Integration  
-- [x] Matchmaker (matchmaking system)  
+- [ ] Discord Bot Integration  
+- [ ] Matchmaker (matchmaking system)  
 - [ ] Party V1 (basic party system)  
 - [ ] Party V2 (advanced party system with cross-play)  
 - [ ] Daily rewards system (login rewards)  
@@ -40,13 +40,13 @@
 - [ ] HWID Bans (hardware bans)  
 - [ ] Refunding system  
 - [ ] Frontend for managing backend  
-- [x] Universal backend (multi-version support)  
-- [x] API for external integrations  
-- [x] Player inventory management  
+- [ ] Universal backend (multi-version support)  
+- [ ] API for external integrations  
+- [ ] Player inventory management  
 - [ ] Seasonal events (Christmas, Halloween)  
 - [ ] Player stats tracking
 - [ ] RabbitMQ/Kafka for event-driven architecture  
-- [x] WebSockets for real-time communication
+- [ ] WebSockets for real-time communication
 
 ## Maybe Features?  
 - [ ] IP Bans (ban based on IP address) 
@@ -56,8 +56,8 @@
 - [ ] Tournament support
 
 ## Planned Bot Commands  
-- [x] Register command (for creating new accounts)  
-- [x] Ping command (for checking bot responsiveness)  
+- [ ] Register command (for creating new accounts)  
+- [ ] Ping command (for checking bot responsiveness)  
 - [ ] User lookup command (check user stats and profile)  
 - [ ] Ban management command (ban/unban users)  
 - [ ] Announcements command (send announcements to users)

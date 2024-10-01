@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 
-const Profile = require("../Models/profile/profile");
+const Profile = require("../database/mongodb/Models/profile/profile");
 
 const Version = require("../utils/functions"); 
 const error = require("../utils/error");

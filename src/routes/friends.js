@@ -1,4 +1,4 @@
-const BlockList = require("../Models/friends/blocklist");
+const BlockList = require("../database/mongodb/Models/friends/blocklist");
 
 module.exports = async function (fastify, options) {
     fastify.get('/friends/api/public/blocklist/:accountId', async (request, reply) => {

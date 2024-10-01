@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const User = require('../Models/user/user.js');
-const UserV2 = require('../Models/user/userv2.js');
-const BattlePass = require('../Models/profile/BattlePass.js');
+const User = require('../database/mongodb/Models/user/user.js');
+const UserV2 = require('../database/mongodb/Models/user/userv2.js');
+const BattlePass = require('../database/mongodb/Models/profile/BattlePass.js');
 
 const athena = require("../responses/DefaultProfiles/athena.json");
 const account = require("./account.js");
 
-const Profile = require("../Models/profile/profile.js");
+const Profile = require("../database/mongodb/Models/profile/profile.js");
 const { createProfiles, validateProfile } = require("../utils/profile.js")
 
 module.exports = async function (fastify, options) {

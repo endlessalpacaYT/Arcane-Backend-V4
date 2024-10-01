@@ -3,9 +3,9 @@ const crypto = require('crypto');
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
-const User = require('../Models/user/user.js');
-const UserV2 = require('../Models/user/userv2.js');
-const Token = require('../Models/token.js');
+const User = require('../database/mongodb/Models/user/user.js');
+const UserV2 = require('../database/mongodb/Models/user/userv2.js');
+const Token = require('../database/mongodb/Models/token.js');
 const functions = require("../utils/functions.js");
 const { error } = require('console');
 const account = require('./account.js');

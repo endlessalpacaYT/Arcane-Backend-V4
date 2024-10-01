@@ -6,7 +6,7 @@
 ## Project Stack: (Will Most Likely Change)
 - Language: Javascript
 - Web Framework: Fastify (HTTP APIs), gRPC (Internal service communication)
-- Database: Cassandra (NoSQL), Redis (in-memory), MongoDB
+- Database: MongoDB
 - Authentication: OAuth 2.0 or JWT-based
 - API Design: REST (public-facing), gRPC (internal communication)
 - Real-time Communication: WebSockets
@@ -21,8 +21,7 @@
 ## Planned Features  
 - [ ] Login system  
 - [ ] Easy setup  
-- [ ] Database (Cassandra, PostgreSQL/MySQL) 
-- [ ] Redis caching for session management  
+- [ ] Database (MongoDB) 
 - [ ] Auto shop (purchasing skins and items)  
 - [ ] Full Battle Pass integration  
 - [ ] Challenges system (daily and weekly challenges)  

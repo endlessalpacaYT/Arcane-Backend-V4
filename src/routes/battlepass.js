@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const BattlePass = require('../Models/profile/BattlePass.js');
+const BattlePass = require('../database/mongodb/Models/profile/BattlePass.js');
 
 // Worked on these for nothing because it dont work anyway and i cant be bothered to try make it work...
 

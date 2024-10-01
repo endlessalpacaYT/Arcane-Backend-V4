@@ -112,7 +112,7 @@ async function initDB() {
 async function startMain() {
     try {
         await fastify.listen({ port: PORT, host: IP });
-        console.log('ArcaneV4 is running on http://localhost:' + PORT);
+        console.log('ArcaneV4 is running on http://" + IP + ":' + PORT);
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);

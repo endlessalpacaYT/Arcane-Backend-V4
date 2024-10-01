@@ -1,5 +1,5 @@
-const User = require('../Models/user/user.js');
-const UserV2 = require('../Models/user/userv2.js');
+const User = require('../database/mongodb/Models/user/user.js');
+const UserV2 = require('../database/mongodb/Models/user/userv2.js');
 
 module.exports = async function (fastify, options) {
     fastify.get("/account/api/public/account/displayName/:displayName", async (request, reply) => {

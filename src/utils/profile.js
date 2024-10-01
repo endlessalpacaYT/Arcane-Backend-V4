@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const Profile = require("../Models/profile/profile.js"); 
+const Profile = require("../database/mongodb/Models/profile/profile.js"); 
 
 function createProfiles(accountId) {
     let profiles = {};

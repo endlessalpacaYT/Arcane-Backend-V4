@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
-const User = require('../../Models/user/user.js');
-const UserV2 = require('../../Models/user/userv2.js');
+const User = require('../../database/mongodb/Models/user/user.js');
+const UserV2 = require('../../database/mongodb/Models/user/userv2.js');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 

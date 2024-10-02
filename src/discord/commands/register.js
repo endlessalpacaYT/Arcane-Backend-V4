@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
 const User = require('../../database/mongodb/Models/user/user.js');
 const UserV2 = require('../../database/mongodb/Models/user/userv2.js');
+const UserV3 = require('../../database/mongodb/Models/user/userv3.js');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 
@@ -39,8 +40,17 @@ module.exports = {
         try {
             const existingUser = await User.findOne({ discordId: userId });
             const existingUserV2 = await UserV2.findOne({ discordId: userId });
+            const existingUserV3 = await UserV3.findOne({ discordId: userId });
 
             if (existingUser) {
+                const embed = new EmbedBuilder()
+                    .setColor("#ff0000")
+                    .setTitle("Failed To Create An Account!")
+                    .setDescription("Reason: You already created an account!");
+
+                await interaction.reply({ embeds: [embed], ephemeral: true });
+                return;
+            } else if (existingUserV2) {
                 const embed = new EmbedBuilder()
                     .setColor("#ff0000")
                     .setTitle("Failed To Create An Account!")
@@ -59,34 +69,56 @@ module.exports = {
             }
 
             try {
-                const newUserV2 = new UserV2({
-                    Create: new Date(),
-                    Banned: false,
-                    BannedReason: "Your Banned From Playing On The Arcane Backend",
-                    MatchmakerID: generateAccountId(),
-                    Discord: userId,
-                    Account: generateAccountId(),
-                    Username: username,
-                    Username_Lower: username.toLowerCase(),
-                    Email: email,
-                    Password: hashedPassword
-                });
-    
-                await newUserV2.save();
-            }catch (err) {
-                const newUser = new User({
-                    created: new Date(),
-                    banned: false,
-                    discordId: userId,
-                    accountId: generateAccountId(),
-                    username: username,
-                    username_lower: username.toLowerCase(),
-                    email: email,
-                    password: hashedPassword
-                });
-    
-                await newUser.save();
-                console.log("Reverted Creating User To V1: " + err);
+                try {
+                    const newUserV3 = new UserV3({
+                        Create: new Date(),
+                        Banned: false,
+                        BannedReason: "Your Banned From Playing On The Arcane Backend",
+                        MatchmakerID: generateAccountId(),
+                        Discord: userId,
+                        Account: generateAccountId(),
+                        Username: username,
+                        Username_Lower: username.toLowerCase(),
+                        Email: email,
+                        Password: hashedPassword
+                    });
+        
+                    await newUserV3.save();
+                } catch {
+                    try {
+                        const newUserV2 = new UserV2({
+                            Create: new Date(),
+                            Banned: false,
+                            BannedReason: "Your Banned From Playing On The Arcane Backend",
+                            MatchmakerID: generateAccountId(),
+                            Discord: userId,
+                            Account: generateAccountId(),
+                            Username: username,
+                            Username_Lower: username.toLowerCase(),
+                            Email: email,
+                            Password: hashedPassword
+                        });
+            
+                        await newUserV2.save();
+                        console.log("Reverted To Saving To V2")
+                    }catch (err) {
+                        const newUser = new User({
+                            created: new Date(),
+                            banned: false,
+                            discordId: userId,
+                            accountId: generateAccountId(),
+                            username: username,
+                            username_lower: username.toLowerCase(),
+                            email: email,
+                            password: hashedPassword
+                        });
+            
+                        await newUser.save();
+                        console.log("Reverted Creating User To V1: " + err);
+                    }
+                }
+            } catch (err) {
+                console.log("Error Saving User: " + err);
             }
 
             const embed = new EmbedBuilder()

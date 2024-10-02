@@ -42,7 +42,7 @@ function setBotStatus() {
     client.user.setPresence({
         activities: [
             {
-                name: "ArcaneV3",
+                name: "ArcaneV4",
                 type: ActivityType.Watching 
             }
         ],

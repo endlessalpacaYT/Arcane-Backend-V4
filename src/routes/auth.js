@@ -15,11 +15,13 @@ const { response } = require('../api/v1/index.js');
 let current_email;
 let current_username;
 let current_accountId;
-let clientId;
+let current_clientId;
 
 module.exports = async function (fastify, options) {
     fastify.post('/account/api/oauth/token', async (request, reply) => {
         const { grant_type, username, password, token_type } = request.body || {};
+
+        let clientId;
 
         try {
             clientId = functions.DecodeBase64(request.headers["authorization"].split(" ")[1]).split(":");
@@ -29,23 +31,24 @@ module.exports = async function (fastify, options) {
             }
         
             clientId = clientId[0];
+            current_clientId = clientId;
         } catch {
             return reply.code(400).send({
-                errorCode: "errors.com.epicgames.common.oauth.invalid_client",
-                errorMessage: "It appears that your Authorization header may be invalid or not present, please verify that you are sending the correct headers.",
-                messageVars: [],
-                numericErrorCode: 1011,
-                originatingService: "invalid_client"
+                errorCode: "arcane.errors.invalid_client",
             });
         }
     
         if (grant_type == "password") {
             let user = await UserV3.findOne({ Email: username });
+            console.log("User Logging In: " + username)
             if (!user) {
                 user = await UserV2.findOne({ Email: username });
+                console.warn("User Logging In Reverted To V2!");
                 if (!user) {
                     user = await User.findOne({ email: username });
+                    console.warn("User Logging In Reverting To V1");
                     if (!user) {
+                        console.warn("User Failed To Log In!")
                         return reply.code(404).send({
                             error: "arcane.errors.user.not_found",
                             error_description: "User not found in the database"
@@ -147,68 +150,65 @@ module.exports = async function (fastify, options) {
     });
 
     fastify.post('/account/api/oauth/verify', async (request, reply) => {
-        let current_token = await Token.findOne({ accountId: current_accountId });
-        if (!current_token || new Date() > current_token.expiresAt) {
-            return response.status(404).send({
+        const token = await findValidToken(current_accountId);
+        if (!token) {
+            return reply.code(404).send({
                 error: "arcane.errors.invalid_token",
-                error_description: 'token not found or expired'
-            })
+                error_description: 'Token not found or expired'
+            });
         }
-
-        let user = await UserV3.findOne({ Account: current_accountId });
+    
+        let user = await UserV3.findOne({ Account: current_accountId }) ||
+                   await UserV2.findOne({ Account: current_accountId }) ||
+                   await User.findOne({ accountId: current_accountId });
+    
         if (!user) {
-            user = await UserV2.findOne({ Account: current_accountId });
-            if (!user) {
-                user = await User.findOne({ accountId: current_accountId });
-                if (!user) {
-                    return reply.code(404).send({
-                        error: "arcane.errors.user.not_found",
-                        error_description: "User not found in the database"
-                    });
-                }
-            }
+            return reply.code(404).send({
+                error: "arcane.errors.user.not_found",
+                error_description: "User not found in the database"
+            });
         }
-        
+    
         return reply.code(200).send({
-            access_token: current_token.token, 
-            expires_in: Math.round((new Date(current_token.expiresAt).getTime() - Date.now()) / 1000), 
-            expires_at: current_token.expiresAt.toISOString(), 
+            access_token: token.token,
+            expires_in: Math.round((new Date(token.expiresAt).getTime() - Date.now()) / 1000),
+            expires_at: token.expiresAt.toISOString(),
             token_type: 'bearer',
-            refresh_token: current_token.refreshToken, 
-            refresh_expires_in: Math.round((new Date(current_token.refreshExpiresAt).getTime() - Date.now()) / 1000),
-            refresh_expires_at: current_token.refreshExpiresAt.toISOString(),
-            account_id: current_accountId, 
-            client_id: clientId, 
+            refresh_token: token.refreshToken,
+            refresh_expires_in: Math.round((new Date(token.refreshExpiresAt).getTime() - Date.now()) / 1000),
+            refresh_expires_at: token.refreshExpiresAt.toISOString(),
+            account_id: current_accountId,
+            client_id: current_clientId,
             internal_client: true,
             client_service: 'fortnite',
-            displayName: user.Username || user.username, 
+            displayName: user.Username || user.username,
             app: 'fortnite',
-            in_app_id: current_accountId, 
-            device_id: "mocked_device_id_123", 
-            session_id: "mocked_session_id_12345", 
-            issued_at: new Date().toISOString(), 
-            scopes: ["basic_profile", "friends_read", "email"], 
+            in_app_id: current_accountId,
+            device_id: "mocked_device_id_123",
+            session_id: "mocked_session_id_12345",
+            issued_at: new Date().toISOString(),
+            scopes: ["basic_profile", "friends_read", "email"],
             permissions: {
-                is_admin: false, 
-                can_chat: true 
+                is_admin: false,
+                can_chat: true
             },
-            ip_address: "192.168.1.1", 
+            ip_address: "192.168.1.1",
             geo_location: {
-                country: "US", 
-                region: "California" 
+                country: "US",
+                region: "California"
             },
             platform: {
-                type: "PC", 
-                version: "10.0.1", 
-                device: "Windows" 
+                type: "PC",
+                version: "10.0.1",
+                device: "Windows"
             },
-            subscription_status: "active", 
-            two_factor_enabled: true, 
-            achievements: ["achievement_1", "achievement_2"], 
+            subscription_status: "active",
+            two_factor_enabled: true,
+            achievements: ["achievement_1", "achievement_2"],
             inventory: {
-                vbucks: 1000, 
-                skins: ["skin_1", "skin_2"], 
-                emotes: ["emote_1", "emote_2"] 
+                vbucks: 1000,
+                skins: ["skin_1", "skin_2"],
+                emotes: ["emote_1", "emote_2"]
             }
         });
     });
@@ -244,7 +244,7 @@ module.exports = async function (fastify, options) {
             });
         }
     
-        let user = await UserV2.findOne({ Account: accountId }) || await User.findOne({ accountId: accountId });
+        let user = await UserV3.findOne({ Account: accountId }) || await UserV2.findOne({ Account: accountId }) || await User.findOne({ accountId: accountId });
     
         if (!user) {
             return reply.code(404).send({

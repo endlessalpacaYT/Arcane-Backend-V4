@@ -15,10 +15,29 @@ const { response } = require('../api/v1/index.js');
 let current_email;
 let current_username;
 let current_accountId;
+let clientId;
 
 module.exports = async function (fastify, options) {
     fastify.post('/account/api/oauth/token', async (request, reply) => {
         const { grant_type, username, password, token_type } = request.body || {};
+
+        try {
+            clientId = functions.DecodeBase64(request.headers["authorization"].split(" ")[1]).split(":");
+        
+            if (!clientId[1]) {
+                throw new Error("invalid client id");
+            }
+        
+            clientId = clientId[0];
+        } catch {
+            return reply.code(400).send({
+                errorCode: "errors.com.epicgames.common.oauth.invalid_client",
+                errorMessage: "It appears that your Authorization header may be invalid or not present, please verify that you are sending the correct headers.",
+                messageVars: [],
+                numericErrorCode: 1011,
+                originatingService: "invalid_client"
+            });
+        }
     
         if (grant_type == "password") {
             let user = await UserV3.findOne({ Email: username });
@@ -84,14 +103,14 @@ module.exports = async function (fastify, options) {
     
             return reply.code(200).send({
                 access_token: current_token.token, 
-                expires_in: Math.round((new Date(current_token.expiresAt).getTime() - Date.now()) / 1000), // Calculating real expiration time in seconds
+                expires_in: Math.round((new Date(current_token.expiresAt).getTime() - Date.now()) / 1000), 
                 expires_at: current_token.expiresAt.toISOString(), 
                 token_type: 'bearer',
                 refresh_token: current_token.refreshToken, 
-                refresh_expires_in: Math.round((new Date(current_token.refreshExpiresAt).getTime() - Date.now()) / 1000), // Real refresh token expiration time in seconds
+                refresh_expires_in: Math.round((new Date(current_token.refreshExpiresAt).getTime() - Date.now()) / 1000), 
                 refresh_expires_at: current_token.refreshExpiresAt.toISOString(),
                 account_id: current_accountId, 
-                client_id: "mocked_client_id_123", 
+                client_id: clientId, 
                 internal_client: true,
                 client_service: 'fortnite',
                 displayName: user.Username || user.username, 
@@ -152,14 +171,14 @@ module.exports = async function (fastify, options) {
         
         return reply.code(200).send({
             access_token: current_token.token, 
-            expires_in: Math.round((new Date(current_token.expiresAt).getTime() - Date.now()) / 1000), // Calculating real expiration time in seconds
+            expires_in: Math.round((new Date(current_token.expiresAt).getTime() - Date.now()) / 1000), 
             expires_at: current_token.expiresAt.toISOString(), 
             token_type: 'bearer',
             refresh_token: current_token.refreshToken, 
-            refresh_expires_in: Math.round((new Date(current_token.refreshExpiresAt).getTime() - Date.now()) / 1000), // Real refresh token expiration time in seconds
+            refresh_expires_in: Math.round((new Date(current_token.refreshExpiresAt).getTime() - Date.now()) / 1000),
             refresh_expires_at: current_token.refreshExpiresAt.toISOString(),
             account_id: current_accountId, 
-            client_id: "mocked_client_id_123", 
+            client_id: clientId, 
             internal_client: true,
             client_service: 'fortnite',
             displayName: user.Username || user.username, 

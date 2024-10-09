@@ -1,8 +1,6 @@
 # Arcane-Backend-V4  
 ## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
 
-## ArcaneV4 is a rewrite of V3
-
 ## Project Stack: (Will Most Likely Change)
 - Language: C++
 

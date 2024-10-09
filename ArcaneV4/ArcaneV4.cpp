@@ -2,5 +2,6 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "ArcaneV4 Is Starting!\n";
+    return 0;
 }

@@ -1,123 +1,139 @@
 ﻿  ArcaneV4.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\string_view(12): warning STL4038: The contents of <string_view> are available only with C++17 or later.
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,53): error C2039: 'string_view': is not a member of 'std'
-  (compiling source file 'ArcaneV4.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\random(47,1):
-      see declaration of 'std'
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,42): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,65): error C2146: syntax error: missing ')' before identifier 'l'
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,65): error C3646: 'l': unknown override specifier
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,79): error C2039: 'string_view': is not a member of 'std'
-  (compiling source file 'ArcaneV4.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\random(47,1):
-      see declaration of 'std'
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,79): error C7525: inline variables require at least '/std:c++17'
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,68): warning C4228: nonstandard extension used: qualifiers after comma in declarator list are ignored
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,91): error C2146: syntax error: missing ';' before identifier 'r'
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,91): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,94): error C2062: type 'bool' unexpected
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,121): error C2059: syntax error: ')'
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(831,9): error C2143: syntax error: missing ';' before '{'
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(831,9): error C2447: '{': missing function header (old-style formal list?)
-  (compiling source file 'ArcaneV4.cpp')
-  
 C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\http_parser_merged.h(587,32): warning C4244: '=': conversion from '__int64' to 'unsigned long', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
 C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\http_parser_merged.h(607,32): warning C4244: '=': conversion from '__int64' to 'unsigned long', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,38): error C2039: 'string_view': is not a member of 'std'
-  (compiling source file 'ArcaneV4.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\locale(24,1):
-      see declaration of 'std'
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,27): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-  (compiling source file 'ArcaneV4.cpp')
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,50): error C2146: syntax error: missing ')' before identifier 'key'
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\json.h(1267,35): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,50): error C3646: 'key': unknown override specifier
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\json.h(1749,32): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,53): error C2059: syntax error: ')'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(157,33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,55): error C2143: syntax error: missing ';' before 'const'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(176,48): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,55): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(178,53): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(178,53): warning C4267:         with
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(178,53): warning C4267:         [
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(178,53): warning C4267:             _Ty=int
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(178,53): warning C4267:         ]
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(15,9): error C2059: syntax error: '{'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(279,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(15,9): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(427,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,36): error C2039: 'string_view': is not a member of 'std'
-  (compiling source file 'ArcaneV4.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\locale(24,1):
-      see declaration of 'std'
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(438,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,48): error C2146: syntax error: missing ')' before identifier 'l'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(456,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,48): error C3646: 'l': unknown override specifier
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(467,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,62): error C2039: 'string_view': is not a member of 'std'
-  (compiling source file 'ArcaneV4.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\locale(24,1):
-      see declaration of 'std'
-  
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,74): error C3646: 'r': unknown override specifier
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(529,60): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,75): error C2059: syntax error: ')'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\mustache.h(629,28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,77): error C2143: syntax error: missing ';' before 'const'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(804,74): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,51): warning C4228: nonstandard extension used: qualifiers after comma in declarator list are ignored
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(804,74): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,77): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(808,74): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(37,9): error C2059: syntax error: '{'
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(808,74): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(37,9): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(812,74): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
   (compiling source file 'ArcaneV4.cpp')
   
-C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\socket_adaptors.h(13,10): error C1083: Cannot open include file: 'asio.hpp': No such file or directory
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(812,74): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
   (compiling source file 'ArcaneV4.cpp')
   
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(816,74): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(816,74): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(820,74): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(820,74): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(824,74): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(824,74): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(830,66): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(830,66): warning C4566: character represented by universal-character-name '\u279D' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(841,31): warning C4566: character represented by universal-character-name '\u2514' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(841,31): warning C4566: character represented by universal-character-name '\u2799' cannot be represented in the current code page (1252)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(904,70): warning C4244: 'argument': conversion from '__int64' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(925,70): warning C4244: 'argument': conversion from '__int64' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(946,70): warning C4244: 'argument': conversion from '__int64' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(968,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(984,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(999,61): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1054,53): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1065,45): warning C4267: '+=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1316,101): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1316,87): warning C4267: 'argument': conversion from 'size_t' to 'uint16_t', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1322,118): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1383,111): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\routing.h(1537,24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+  ArcaneV4.vcxproj -> C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\x64\Debug\ArcaneV4.exe

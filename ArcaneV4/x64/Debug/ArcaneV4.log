@@ -1,2 +1,123 @@
 ﻿  ArcaneV4.cpp
-  ArcaneV4.vcxproj -> C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\x64\Debug\ArcaneV4.exe
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\string_view(12): warning STL4038: The contents of <string_view> are available only with C++17 or later.
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,53): error C2039: 'string_view': is not a member of 'std'
+  (compiling source file 'ArcaneV4.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\random(47,1):
+      see declaration of 'std'
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,42): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,65): error C2146: syntax error: missing ')' before identifier 'l'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,65): error C3646: 'l': unknown override specifier
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,79): error C2039: 'string_view': is not a member of 'std'
+  (compiling source file 'ArcaneV4.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\random(47,1):
+      see declaration of 'std'
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,79): error C7525: inline variables require at least '/std:c++17'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,68): warning C4228: nonstandard extension used: qualifiers after comma in declarator list are ignored
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,91): error C2146: syntax error: missing ';' before identifier 'r'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,91): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,94): error C2062: type 'bool' unexpected
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(830,121): error C2059: syntax error: ')'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(831,9): error C2143: syntax error: missing ';' before '{'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\utility.h(831,9): error C2447: '{': missing function header (old-style formal list?)
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\http_parser_merged.h(587,32): warning C4244: '=': conversion from '__int64' to 'unsigned long', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\http_parser_merged.h(607,32): warning C4244: '=': conversion from '__int64' to 'unsigned long', possible loss of data
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,38): error C2039: 'string_view': is not a member of 'std'
+  (compiling source file 'ArcaneV4.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\locale(24,1):
+      see declaration of 'std'
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,27): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,50): error C2146: syntax error: missing ')' before identifier 'key'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,50): error C3646: 'key': unknown override specifier
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,53): error C2059: syntax error: ')'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,55): error C2143: syntax error: missing ';' before 'const'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(14,55): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(15,9): error C2059: syntax error: '{'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(15,9): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,36): error C2039: 'string_view': is not a member of 'std'
+  (compiling source file 'ArcaneV4.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\locale(24,1):
+      see declaration of 'std'
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,48): error C2146: syntax error: missing ')' before identifier 'l'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,48): error C3646: 'l': unknown override specifier
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,62): error C2039: 'string_view': is not a member of 'std'
+  (compiling source file 'ArcaneV4.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\include\locale(24,1):
+      see declaration of 'std'
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,74): error C3646: 'r': unknown override specifier
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,75): error C2059: syntax error: ')'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,77): error C2143: syntax error: missing ';' before 'const'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,51): warning C4228: nonstandard extension used: qualifiers after comma in declarator list are ignored
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(36,77): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(37,9): error C2059: syntax error: '{'
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\ci_map.h(37,9): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+  (compiling source file 'ArcaneV4.cpp')
+  
+C:\Users\tyler\Documents\GitHub\Arcane-Backend-V4\ArcaneV4\include\crow\socket_adaptors.h(13,10): error C1083: Cannot open include file: 'asio.hpp': No such file or directory
+  (compiling source file 'ArcaneV4.cpp')
+  

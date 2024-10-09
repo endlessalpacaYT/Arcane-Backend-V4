@@ -4,19 +4,7 @@
 ## ArcaneV4 is a rewrite of V3
 
 ## Project Stack: (Will Most Likely Change)
-- Language: Javascript
-- Web Framework: Fastify (HTTP APIs), gRPC (Internal service communication)
-- Database: MongoDB
-- Authentication: OAuth 2.0 or JWT-based
-- API Design: REST (public-facing), gRPC (internal communication)
-- Real-time Communication: WebSockets
-- Message Queuing: RabbitMQ or Apache Kafka
-- Containerization & Orchestration: Docker + Kubernetes
-- Caching: Redis
-- Event-Driven Architecture: Apache Kafka
-- Session Management: Redis (active sessions), Cassandra (long-term sessions)
-- Logging and Monitoring: ELK Stack (Elasticsearch, Logstash, Kibana)
-- Data Storage: AWS S3 or Google Cloud Storage (If Ya Want!)
+- Language: C++
 
 ## Planned Features  
 - [ ] Login system  
@@ -43,8 +31,7 @@
 - [ ] API for external integrations  
 - [ ] Player inventory management  
 - [ ] Seasonal events (Christmas, Halloween)  
-- [ ] Player stats tracking
-- [ ] RabbitMQ/Kafka for event-driven architecture  
+- [ ] Player stats tracking 
 - [ ] WebSockets for real-time communication
 
 ## Maybe Features?  

@@ -3,6 +3,7 @@
 #include <future>
 #include "crow.h"
 #include <boost/asio.hpp>
+#include "routes.h"
 
 void startHTTPServer(int port);
 
@@ -19,9 +20,7 @@ int main()
 void startHTTPServer(int port) {
     crow::SimpleApp app;
 
-    CROW_ROUTE(app, "/")([]() {
-        return "ArcaneBackendV4";
-    });
+    defineRoutes(app);
 
     app.port(port).multithreaded().run();
 }

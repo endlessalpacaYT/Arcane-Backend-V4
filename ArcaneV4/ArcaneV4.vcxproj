@@ -132,6 +132,9 @@
   <ItemGroup>
     <ClCompile Include="ArcaneV4.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="routes.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

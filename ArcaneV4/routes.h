@@ -1,8 +1,14 @@
+#include <iostream>
 #include "crow.h"
 
 void mainRoutes(crow::SimpleApp& app) {
     CROW_ROUTE(app, "/")([]() {
-        return "ArcaneBackendV4";
+        crow::json::wvalue response;
+        response["message"] = "ArcaneBackendV4";
+        response["status"] = "success";
+        response["code"] = 200;
+
+        return response;
     });
 }
 

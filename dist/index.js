@@ -13,19 +13,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = __importDefault(require("fastify"));
-const fastify = (0, fastify_1.default)({ logger: true });
+const formbody_1 = __importDefault(require("@fastify/formbody"));
+const router_1 = __importDefault(require("./src/utils/router"));
+const fastify = (0, fastify_1.default)({ logger: { level: 'warn' } });
 const IP = "0.0.0.0";
 const PORT = 3551;
+fastify.register(formbody_1.default);
 fastify.addHook('onResponse', (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
     if (reply.statusCode >= 400) {
         fastify.log.info(`Response with status code: ${reply.statusCode} for ${request.method} ${request.url}`);
     }
 }));
-fastify.get('/', (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    return {
-        backend: "ArcaneBackendV4"
-    };
-}));
+fastify.setNotFoundHandler((request, reply) => {
+    console.log(`404 Not Found: ${request.method} : ${request.url}`);
+    reply
+        .status(404)
+        .send({
+        error: 'arcane.errors.common.not_found',
+        message: 'The route you requested is either unavailable or missing!',
+        code: 404
+    });
+});
+router_1.default.registerRoutes(fastify);
 function startHTTPServer() {
     try {
         fastify.listen({ port: PORT, host: IP });

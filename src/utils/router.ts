@@ -12,6 +12,7 @@ import { cloudstorageRoutes } from '../routes/cloudstorage';
 import { lightswitchRoutes } from '../routes/lightswitch';
 import { partyRoutes } from '../routes/party';
 import { friendRoutes } from '../routes/friends';
+import { contentRoutes } from '../routes/content';
 import { receiptRoutes } from '../routes/receipts';
 
 function registerRoutes(fastify: FastifyInstance) {
@@ -27,6 +28,7 @@ function registerRoutes(fastify: FastifyInstance) {
     lightswitchRoutes(fastify);
     partyRoutes(fastify);
     friendRoutes(fastify);
+    contentRoutes(fastify);
     receiptRoutes(fastify);
 }
 

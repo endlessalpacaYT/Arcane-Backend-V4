@@ -7,4 +7,8 @@ export async function partyRoutes(fastify: FastifyInstance) {
             code: 200
         })
     })
+
+    fastify.get('/party/api/v1/Fortnite/user/:accountId/notifications/undelivered/count', (request, reply) => {
+        return reply.status(200).send([])
+    })
 }

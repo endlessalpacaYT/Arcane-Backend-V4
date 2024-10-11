@@ -38,6 +38,17 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         }
     })
 
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/ClaimMfaEnabled', (request: FastifyRequest<{ Params: AccountParams, Querystring: QueryProfile }>, reply: FastifyReply) => {
+        if (request.query.profileId == "common_core") {
+            return reply.status(200).send(common_core);
+        } else {
+            return reply.status(200).send({
+                status: "OK",
+                code: 200
+            })
+        }
+    })
+
     fastify.post('/fortnite/api/game/v2/profile/:accountId/client/ClientQuestLogin', (request: FastifyRequest<{ Params: AccountParams, Querystring: QueryProfile }>, reply: FastifyReply) => {
         if (request.query.profileId == "athena") {
             return reply.status(200).send(athena);

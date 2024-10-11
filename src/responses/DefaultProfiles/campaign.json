@@ -7,8 +7,8 @@
   "profileId": "campaign",
   "version": "no_version",
   "items": {
-    "Token:Ero": {
-      "templateId": "Token:Ero",
+    "Token:Arcane": {
+      "templateId": "Token:Arcane",
       "attributes": {
         "item_seen": true
       },

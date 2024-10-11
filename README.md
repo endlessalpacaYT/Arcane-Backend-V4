@@ -5,8 +5,8 @@
 - Language: Typescript
 
 ## Planned Features  
-- [ ] Login system  
-- [ ] Easy setup  
+- [x] Login system  
+- [x] Easy setup  
 - [ ] Database (MongoDB) 
 - [ ] Auto shop (purchasing skins and items)  
 - [ ] Full Battle Pass integration  
@@ -14,6 +14,7 @@
 - [ ] Friends system (add/remove/block friends)  
 - [ ] XMPP  
 - [ ] Working MCP
+- [ ] NewsV1 (Fortnite in-game news system) 
 - [ ] NewsV2 (Fortnite in-game news system)  
 - [ ] Discord Bot Integration  
 - [ ] Matchmaker (matchmaking system)  
@@ -25,7 +26,7 @@
 - [ ] HWID Bans (hardware bans)  
 - [ ] Refunding system  
 - [ ] Frontend for managing backend  
-- [ ] Universal backend (multi-version support)  
+- [x] Universal backend (multi-version support)  
 - [ ] API for external integrations  
 - [ ] Player inventory management  
 - [ ] Seasonal events (Christmas, Halloween)  

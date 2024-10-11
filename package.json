@@ -6,10 +6,19 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@discordjs/builders": "^1.9.0",
+    "@discordjs/rest": "^2.4.0",
     "@fastify/formbody": "^8.0.1",
+    "@types/bcrypt": "^5.0.2",
+    "@types/dotenv": "^6.1.1",
+    "@types/uuid": "^10.0.0",
+    "bcrypt": "^5.1.1",
     "crypto": "^1.0.1",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
     "fastify": "^5.0.0",
-    "mongoose": "^8.7.1"
+    "mongoose": "^8.7.1",
+    "uuid": "^10.0.0"
   },
   "scripts": {
     "dev": "nodemon --watch src --exec ts-node index.ts"

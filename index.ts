@@ -1,13 +1,18 @@
 import { warn } from 'console';
 import Fastify from 'fastify';
+import mongoose from 'mongoose';
 import formbody from '@fastify/formbody';
+require("dotenv").config();
 
 import router from "./src/utils/router";
+import database from "./src/database/connect";
+import discord from "./src/discord/index";
 
 const fastify = Fastify({ logger: { level: 'warn' } });
 
-const IP = "0.0.0.0";
-const PORT = 3551;
+const IP = process.env.IP || "0.0.0.0";
+const PORT = process.env.PORT || 3551;
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/ArcaneV4";
 
 fastify.register(formbody);
 
@@ -32,7 +37,7 @@ router.registerRoutes(fastify);
 
 function startHTTPServer() {
     try {
-        fastify.listen({ port: PORT, host: IP });
+        fastify.listen({ port: Number(PORT), host: IP });
         console.log(`Arcane Listening On: http://${IP}:${PORT}`);
       } catch (err) {
         fastify.log.error(err);
@@ -40,8 +45,12 @@ function startHTTPServer() {
     }
 }
 
-function startBackend() {
+async function startBackend() {
     startHTTPServer();
+    await database.connectDB(MONGO_URI);
+    if (process.env.BOT_ENABLED == "true") {
+        discord();
+    }
 }
 
 startBackend();

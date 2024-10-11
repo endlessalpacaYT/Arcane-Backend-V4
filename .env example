@@ -1,0 +1,10 @@
+# Server Settings
+IP=0.0.0.0
+PORT=3551
+
+# Database Settings
+MONGO_URI=mongodb://localhost:27017/ArcaneV4
+
+# Discord Settings (BOT DEPRECATED SINCE V3: only updates to discord bot will be with pull requests)
+BOT_ENABLED=false
+BOT_TOKEN=

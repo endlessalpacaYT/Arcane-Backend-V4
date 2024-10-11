@@ -64,4 +64,8 @@ export async function accountRoutes(fastify: FastifyInstance) {
             code: 200
         })
     })
+
+    fastify.get('/socialban/api/public/v1/:accountId', (request, reply) => {
+        return reply.status(200).send([])
+    })
 }

@@ -1,5 +1,6 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 
+const athena = require("../responses/DefaultProfiles/athena.json")
 const common_public = require("../responses/DefaultProfiles/common_public.json")
 const common_core = require("../responses/DefaultProfiles/common_core.json")
 
@@ -29,6 +30,17 @@ export async function mcpRoutes(fastify: FastifyInstance) {
     fastify.post('/fortnite/api/game/v2/profile/:accountId/client/SetMtxPlatform', (request: FastifyRequest<{ Params: AccountParams, Querystring: QueryProfile }>, reply: FastifyReply) => {
         if (request.query.profileId == "common_core") {
             return reply.status(200).send(common_core);
+        } else {
+            return reply.status(200).send({
+                status: "OK",
+                code: 200
+            })
+        }
+    })
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/ClientQuestLogin', (request: FastifyRequest<{ Params: AccountParams, Querystring: QueryProfile }>, reply: FastifyReply) => {
+        if (request.query.profileId == "athena") {
+            return reply.status(200).send(athena);
         } else {
             return reply.status(200).send({
                 status: "OK",

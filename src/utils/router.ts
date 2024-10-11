@@ -10,6 +10,7 @@ import { feedbackRoutes } from '../routes/feedback';
 import { versionRoutes } from '../routes/version';
 import { cloudstorageRoutes } from '../routes/cloudstorage';
 import { lightswitchRoutes } from '../routes/lightswitch';
+import { friendRoutes } from '../routes/friends';
 
 function registerRoutes(fastify: FastifyInstance) {
     defaultRoutes(fastify)
@@ -22,6 +23,7 @@ function registerRoutes(fastify: FastifyInstance) {
     versionRoutes(fastify);
     cloudstorageRoutes(fastify);
     lightswitchRoutes(fastify);
+    friendRoutes(fastify);
 }
 
 export default {

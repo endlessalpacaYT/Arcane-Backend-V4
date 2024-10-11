@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@fastify/formbody": "^8.0.1",
-    "fastify": "^5.0.0"
+    "crypto": "^1.0.1",
+    "fastify": "^5.0.0",
+    "mongoose": "^8.7.1"
   },
   "scripts": {
     "dev": "nodemon --watch src --exec ts-node index.ts"

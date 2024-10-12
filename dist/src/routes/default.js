@@ -13,9 +13,9 @@ exports.defaultRoutes = defaultRoutes;
 function defaultRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
         fastify.get('/', (request, reply) => __awaiter(this, void 0, void 0, function* () {
-            return {
+            return reply.status(200).send({
                 backend: "ArcaneBackendV4"
-            };
+            });
         }));
     });
 }

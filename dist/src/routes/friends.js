@@ -15,6 +15,9 @@ function friendRoutes(fastify) {
         fastify.get('/friends/api/v1/:accountId/blocklist', (request, reply) => {
             return reply.status(200).send([]);
         });
+        fastify.get('/friends/api/public/blocklist/:accountId', (request, reply) => {
+            return reply.status(200).send([]);
+        });
         fastify.get('/friends/api/v1/:accountId/summary', (request, reply) => {
             return reply.status(200).send([]);
         });

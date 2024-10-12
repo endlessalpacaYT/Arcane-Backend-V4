@@ -21,7 +21,7 @@ client.once('ready', () => {
 async function registerCommands(): Promise<void> {
     const commands: any[] = [];
     const commandsPath = path.join(__dirname, 'commands');
-    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'));
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
     for (const file of commandFiles) {
         const command = require(path.join(commandsPath, file));
@@ -57,7 +57,7 @@ client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
 
     try {
-        const command = require(`./commands/${interaction.commandName}.ts`);
+        const command = require(`./commands/${interaction.commandName}.js`);
         await command.execute(interaction);
     } catch (error) {
         console.error(`Error executing ${interaction.commandName}:`, error);

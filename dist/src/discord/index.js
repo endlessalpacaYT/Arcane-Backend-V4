@@ -34,7 +34,7 @@ function registerCommands() {
     return __awaiter(this, void 0, void 0, function* () {
         const commands = [];
         const commandsPath = path_1.default.join(__dirname, 'commands');
-        const commandFiles = fs_1.default.readdirSync(commandsPath).filter(file => file.endsWith('.ts'));
+        const commandFiles = fs_1.default.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
         for (const file of commandFiles) {
             const command = require(path_1.default.join(commandsPath, file));
             commands.push(command.data.toJSON());
@@ -65,7 +65,7 @@ client.on('interactionCreate', (interaction) => __awaiter(void 0, void 0, void 0
     if (!interaction.isCommand())
         return;
     try {
-        const command = require(`./commands/${interaction.commandName}.ts`);
+        const command = require(`./commands/${interaction.commandName}.js`);
         yield command.execute(interaction);
     }
     catch (error) {

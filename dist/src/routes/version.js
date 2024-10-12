@@ -36,7 +36,7 @@ function versionRoutes(fastify) {
                                 state: {
                                     activeStorefronts: [],
                                     eventNamedWeights: {},
-                                    seasonNumber: 12,
+                                    seasonNumber: 3.5,
                                     seasonTemplateId: `AthenaSeason:athenaseason12`,
                                     matchXpBonusPoints: 0,
                                     seasonBegin: "2020-01-01T00:00:00Z",

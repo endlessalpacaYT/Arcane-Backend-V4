@@ -8,3 +8,6 @@ MONGO_URI=mongodb://localhost:27017/ArcaneV4
 # Discord Settings (BOT DEPRECATED SINCE V3: only updates to discord bot will be with pull requests)
 BOT_ENABLED=false
 BOT_TOKEN=
+# false =  no embed true = embed will get send if there is a channel ID in BAN_EMBED_CHANNELID=
+BAN_EMBED_ENABLED=
+BAN_EMBED_CHANNELID=

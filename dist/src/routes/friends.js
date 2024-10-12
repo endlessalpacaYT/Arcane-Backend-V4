@@ -9,14 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storefrontRoutes = storefrontRoutes;
-const keychain = require("../responses/keychain.json");
-function storefrontRoutes(fastify) {
+exports.friendRoutes = friendRoutes;
+function friendRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
-        fastify.get('/fortnite/api/storefront/v2/keychain', (request, reply) => {
-            return reply.status(200).send(keychain);
+        fastify.get('/friends/api/v1/:accountId/blocklist', (request, reply) => {
+            return reply.status(200).send([]);
         });
-        fastify.get('/fortnite/api/storefront/v2/catalog', (request, reply) => {
+        fastify.get('/friends/api/v1/:accountId/summary', (request, reply) => {
+            return reply.status(200).send([]);
+        });
+        fastify.get('/friends/api/public/friends/:accountId', (request, reply) => {
+            return reply.status(200).send([]);
+        });
+        fastify.get('/friends/api/v1/:accountId/recent/fortnite', (request, reply) => {
+            return reply.status(200).send([]);
+        });
+        fastify.get('/friends/api/v1/:accountId/settings', (request, reply) => {
             return reply.status(200).send([]);
         });
     });

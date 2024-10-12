@@ -32,7 +32,7 @@ function authRoutes(fastify) {
                 "device_id": "ArcaneV4"
             });
         }));
-        fastify.post('/account/api/oauth/verify', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+        fastify.get('/account/api/oauth/verify', (request, reply) => __awaiter(this, void 0, void 0, function* () {
             reply.header('Content-Type', 'application/json');
             return reply.status(200).send({
                 "access_token": "ArcaneV4",

@@ -9,14 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.storefrontRoutes = storefrontRoutes;
-const keychain = require("../responses/keychain.json");
-function storefrontRoutes(fastify) {
+exports.partyRoutes = partyRoutes;
+function partyRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
-        fastify.get('/fortnite/api/storefront/v2/keychain', (request, reply) => {
-            return reply.status(200).send(keychain);
+        fastify.get('/party/api/v1/Fortnite/user/:accountId', (request, reply) => {
+            return reply.status(200).send({
+                status: "OK",
+                code: 200
+            });
         });
-        fastify.get('/fortnite/api/storefront/v2/catalog', (request, reply) => {
+        fastify.get('/party/api/v1/Fortnite/user/:accountId/notifications/undelivered/count', (request, reply) => {
             return reply.status(200).send([]);
         });
     });

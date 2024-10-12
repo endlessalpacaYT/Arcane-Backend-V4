@@ -14,10 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = __importDefault(require("fastify"));
 const formbody_1 = __importDefault(require("@fastify/formbody"));
+require("dotenv").config();
 const router_1 = __importDefault(require("./src/utils/router"));
+const connect_1 = __importDefault(require("./src/database/connect"));
+const index_1 = __importDefault(require("./src/discord/index"));
 const fastify = (0, fastify_1.default)({ logger: { level: 'warn' } });
-const IP = "0.0.0.0";
-const PORT = 3551;
+const IP = process.env.IP || "0.0.0.0";
+const PORT = process.env.PORT || 3551;
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/ArcaneV4";
 fastify.register(formbody_1.default);
 fastify.addHook('onResponse', (request, reply) => __awaiter(void 0, void 0, void 0, function* () {
     if (reply.statusCode >= 400) {
@@ -37,7 +41,7 @@ fastify.setNotFoundHandler((request, reply) => {
 router_1.default.registerRoutes(fastify);
 function startHTTPServer() {
     try {
-        fastify.listen({ port: PORT, host: IP });
+        fastify.listen({ port: Number(PORT), host: IP });
         console.log(`Arcane Listening On: http://${IP}:${PORT}`);
     }
     catch (err) {
@@ -46,6 +50,12 @@ function startHTTPServer() {
     }
 }
 function startBackend() {
-    startHTTPServer();
+    return __awaiter(this, void 0, void 0, function* () {
+        startHTTPServer();
+        yield connect_1.default.connectDB(MONGO_URI);
+        if (process.env.BOT_ENABLED == "true") {
+            (0, index_1.default)();
+        }
+    });
 }
 startBackend();

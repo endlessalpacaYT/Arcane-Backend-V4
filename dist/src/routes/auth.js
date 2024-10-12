@@ -8,12 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authRoutes = authRoutes;
+const user_1 = __importDefault(require("../database/models/user"));
 function authRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
         fastify.post('/account/api/oauth/token', (request, reply) => __awaiter(this, void 0, void 0, function* () {
             reply.header('Content-Type', 'application/json');
+            const { username, password, grant_type } = request.body;
+            const user = yield user_1.default.findOne({ email: username });
+            if (!user) {
+                return reply.status(404).send({
+                    error: "errors.arcane.user.not_found",
+                    error_description: "The user was not found in the database",
+                    code: 404
+                });
+            }
             return reply.status(200).send({
                 "access_token": "ArcaneV4",
                 "expires_in": 28800,

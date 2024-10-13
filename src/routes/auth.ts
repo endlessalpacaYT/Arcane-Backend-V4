@@ -55,13 +55,13 @@ export async function authRoutes(fastify: FastifyInstance) {
                     const newRefreshToken = crypto.randomBytes(32).toString('hex');
         
                     if (current_token) {
-                        current_token.token = newAccessToken;
+                        current_token.token = token_type + "~" + newAccessToken;
                         current_token.expiresAt = new Date(Date.now() + 28800 * 1000);
                         current_token.refreshToken = newRefreshToken;
                         current_token.refreshExpiresAt = new Date(Date.now() + 86400 * 1000);
                     } else {
                         current_token = new Token({
-                            token: newAccessToken,
+                            token: token_type + "~" + newAccessToken,
                             accountId: user.accountId,
                             expiresAt: new Date(Date.now() + 28800 * 1000),
                             refreshToken: newRefreshToken,
@@ -73,7 +73,7 @@ export async function authRoutes(fastify: FastifyInstance) {
                 }
 
                 return reply.status(200).send({
-                    "access_token": `${token_type}~${current_token.token}`,
+                    "access_token": current_token.token,
                     "expires_in": 28800,
                     "expires_at": "9999-12-02T01:12:01.100Z",
                     "token_type": "bearer",
@@ -124,23 +124,53 @@ export async function authRoutes(fastify: FastifyInstance) {
     });
 
     fastify.get('/account/api/oauth/verify', async (request, reply) => {
+        const { authorization } = request.headers;
         reply.header('Content-Type', 'application/json');
+
+        if (!authorization || !authorization.startsWith('bearer ')) {
+            console.error("Authorization token is required");
+            return reply.code(400).send({
+                error: 'arcane.errors.missing_token',
+                error_description: 'Authorization token is required'
+            });
+        }
+
+        const token = authorization.split(' ')[1];
+
+        const userToken = await Token.findOne({ token: token });
+        if (!userToken) {
+            return reply.status(404).send({
+                error: "arcane.errors.token.not_found",
+                error_description: "The token was not found in the database",
+                code: 404
+            })
+        }
+
+        const user = await User.findOne({ accountId: userToken.accountId })
+        if (!user) {
+            return reply.status(404).send({
+                error: "arcane.errors.user.not_found",
+                error_description: "The user was not found in the database",
+                code: 404
+            })
+        } 
+
         return reply.status(200).send({
-            "access_token": "ArcaneV4",
+            "access_token": userToken.token,
             "expires_in": 28800,
             "expires_at": "9999-12-02T01:12:01.100Z",
             "token_type": "bearer",
             "refresh_token": "ArcaneV4",
             "refresh_expires": 86400,
             "refresh_expires_at": "9999-12-02T01:12:01.100Z",
-            "account_id": "ArcaneV4",
+            "account_id": user.accountId,
             "client_id": "ArcaneV4",
             "internal_client": true,
             "client_service": "fortnite",
-            "displayName": "ArcaneV4",
+            "displayName": user.username,
             "app": "fortnite",
-            "in_app_id": "ArcaneV4",
-            "device_id": "ArcaneV4"
+            "in_app_id": user.accountId,
+            "device_id": user.accountId
         })
     });
 

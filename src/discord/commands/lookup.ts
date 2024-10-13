@@ -1,22 +1,33 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+  PermissionFlagsBits,
+} from "discord.js";
 import { EmbedBuilder } from "discord.js";
 import User from "../../database/models/user";
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("details")
-    .setDescription("View your account details"),
+    .setName("lookup")
+    .setDescription("Lookup another user")
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
+    .addUserOption((option) =>
+      option
+        .setName("user")
+        .setDescription("Select the user you want to lookup.")
+        .setRequired(true)
+    ),
 
   async execute(interaction: ChatInputCommandInteraction) {
     try {
-      const user = await User.findOne({ discordId: interaction.user.id });
+      const user = await User.findOne({
+        discordId: interaction.options.getUser("user")?.id,
+      });
       if (!user) {
         const embed = new EmbedBuilder()
           .setColor("#ff0000")
-          .setTitle("Failed To retrieve details")
-          .setDescription(
-            "Reason: You do not have an Account! to create one do /register"
-          );
+          .setTitle("Failed To lookup that user")
+          .setDescription("Reason: that user doesent have an account!");
 
         await interaction.reply({ embeds: [embed], ephemeral: true });
         return;
@@ -24,7 +35,7 @@ module.exports = {
 
       const embed = new EmbedBuilder()
         .setColor("#a600ff")
-        .setTitle("Account Details")
+        .setTitle("User lookup")
         .addFields(
           {
             name: "Created",
@@ -34,7 +45,7 @@ module.exports = {
           {
             name: "Banned",
             value: user.banned ? "🔴 Yes" : "🟢 No",
-            inline: true,
+            inline: false,
           },
           {
             name: "Account ID",
@@ -44,18 +55,13 @@ module.exports = {
           {
             name: "Username",
             value: user.username,
-            inline: true,
-          },
-          {
-            name: "Email",
-            value: `||${user.email}||`,
-            inline: true,
+            inline: false,
           }
         );
 
       await interaction.reply({ embeds: [embed], ephemeral: true });
     } catch (error) {
-      console.error("Error executing details command:", error);
+      console.error("Error executing the lookup command:", error);
       await interaction.reply({
         content: "There was an error while executing this command!",
         ephemeral: true,

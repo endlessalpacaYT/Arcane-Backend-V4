@@ -26,8 +26,11 @@ module.exports = {
             }
             catch (error) {
                 console.error("Error executing ping command:", error);
-                yield interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                yield interaction.reply({
+                    content: "There was an error while executing this command!",
+                    ephemeral: true,
+                });
             }
         });
-    }
+    },
 };

@@ -41,10 +41,10 @@
 - [ ] Tournament support
 
 ## Planned Bot Commands  
-- [ ] Register command (for creating new accounts)  
-- [ ] Ping command (for checking bot responsiveness)  
-- [ ] User lookup command (check user stats and profile)  
-- [ ] Ban management command (ban/unban users)  
+- [x] Register command (for creating new accounts)  
+- [x] Ping command (for checking bot responsiveness)  
+- [x] User lookup command (check user stats and profile)  
+- [x] Ban management command (ban/unban users)  
 - [ ] Announcements command (send announcements to users)
 
 ## Contributing Guide

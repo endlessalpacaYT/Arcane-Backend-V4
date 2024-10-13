@@ -15,49 +15,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const discord_js_2 = require("discord.js");
 const user_1 = __importDefault(require("../../database/models/user"));
-require("dotenv").config();
 module.exports = {
     data: new discord_js_1.SlashCommandBuilder()
-        .setName("unban")
-        .setDescription("unban someone from ArcaneV4!")
+        .setName("lookup")
+        .setDescription("Lookup another user")
         .setDefaultMemberPermissions(discord_js_1.PermissionFlagsBits.BanMembers)
-        .addStringOption((option) => option
-        .setName("username")
-        .setDescription("Who do you want to unban?")
+        .addUserOption((option) => option
+        .setName("user")
+        .setDescription("Select the user you want to lookup.")
         .setRequired(true)),
     execute(interaction) {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
                 const user = yield user_1.default.findOne({
-                    username_lower: (_a = interaction.options
-                        .getString("username")) === null || _a === void 0 ? void 0 : _a.toLowerCase(),
+                    discordId: (_a = interaction.options.getUser("user")) === null || _a === void 0 ? void 0 : _a.id,
                 });
                 if (!user) {
                     const embed = new discord_js_2.EmbedBuilder()
                         .setColor("#ff0000")
-                        .setTitle("Failed to unban user")
-                        .setDescription("Reason: Couldn't find the user you were trying to unban.");
+                        .setTitle("Failed To lookup that user")
+                        .setDescription("Reason: that user doesent have an account!");
                     yield interaction.reply({ embeds: [embed], ephemeral: true });
                     return;
                 }
-                else if (user.banned == false) {
-                    const embed = new discord_js_2.EmbedBuilder()
-                        .setColor("#ff0000")
-                        .setTitle("Failed to unban user")
-                        .setDescription("Reason: The user you were trying to unban isn't banned!");
-                    yield interaction.reply({ embeds: [embed], ephemeral: true });
-                }
-                yield user.updateOne({ $set: { banned: false } });
-                yield interaction.reply({
-                    content: `Successfully unbanned ${user.username}!`,
-                    ephemeral: true,
+                const embed = new discord_js_2.EmbedBuilder()
+                    .setColor("#a600ff")
+                    .setTitle("User lookup")
+                    .addFields({
+                    name: "Created",
+                    value: new Date(user.created).toLocaleDateString(),
+                    inline: true,
+                }, {
+                    name: "Banned",
+                    value: user.banned ? "🔴 Yes" : "🟢 No",
+                    inline: false,
+                }, {
+                    name: "Account ID",
+                    value: `\`${user.accountId}\``,
+                    inline: false,
+                }, {
+                    name: "Username",
+                    value: user.username,
+                    inline: false,
                 });
+                yield interaction.reply({ embeds: [embed], ephemeral: true });
             }
             catch (error) {
-                console.error("Error executing the unban command:", error);
-                yield interaction.editReply({
+                console.error("Error executing the lookup command:", error);
+                yield interaction.reply({
                     content: "There was an error while executing this command!",
+                    ephemeral: true,
                 });
             }
         });

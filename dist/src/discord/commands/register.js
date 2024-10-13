@@ -21,28 +21,34 @@ module.exports = {
     data: new discord_js_1.SlashCommandBuilder()
         .setName("register")
         .setDescription("Create An Account On ArcaneV4!")
-        .addStringOption(option => option.setName("username")
+        .addStringOption((option) => option
+        .setName("username")
         .setDescription("What Do You Want Your Ingame Username To Be?")
         .setRequired(true))
-        .addStringOption(option => option.setName("email")
+        .addStringOption((option) => option
+        .setName("email")
         .setDescription("Your Email Which Will Be Used To Login.")
         .setRequired(true))
-        .addStringOption(option => option.setName("password")
+        .addStringOption((option) => option
+        .setName("password")
         .setDescription("Your Password Which Will Be Used To Login.")
         .setRequired(true)),
     execute(interaction) {
         return __awaiter(this, void 0, void 0, function* () {
-            const username = interaction.options.getString('username');
-            const email = interaction.options.getString('email');
-            const password = interaction.options.getString('password');
+            const username = interaction.options.getString("username");
+            const email = interaction.options.getString("email");
+            const password = interaction.options.getString("password");
             const userId = interaction.user.id;
             function generateAccountId() {
                 const uuid = (0, uuid_1.v4)();
-                const accountId = uuid.replace(/-/g, '').substring(0, 32);
+                const accountId = uuid.replace(/-/g, "").substring(0, 32);
                 return accountId.toUpperCase();
             }
             if (!username || !email || !password) {
-                return interaction.reply({ content: 'All fields are required!', ephemeral: true });
+                return interaction.reply({
+                    content: "All fields are required!",
+                    ephemeral: true,
+                });
             }
             const hashedPassword = yield bcrypt_1.default.hash(password, 10);
             try {
@@ -63,7 +69,7 @@ module.exports = {
                     username: username,
                     username_lower: username.toLowerCase(),
                     email: email,
-                    password: hashedPassword
+                    password: hashedPassword,
                 });
                 yield newUser.save();
                 const embed = new discord_js_2.EmbedBuilder()
@@ -81,9 +87,12 @@ module.exports = {
                 yield interaction.reply({ embeds: [embed], ephemeral: true });
             }
             catch (error) {
-                console.error('Error registering user:', error);
-                yield interaction.reply({ content: 'There was an error registering your account. Please try again later.', ephemeral: true });
+                console.error("Error registering user:", error);
+                yield interaction.reply({
+                    content: "There was an error registering your account. Please try again later.",
+                    ephemeral: true,
+                });
             }
         });
-    }
+    },
 };

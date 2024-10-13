@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.accountRoutes = accountRoutes;
+const user_1 = __importDefault(require("../database/models/user"));
 function accountRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
         fastify.post('/fortnite/api/game/v2/tryPlayOnPlatform/account/:accountId', (request, reply) => {
@@ -25,21 +29,37 @@ function accountRoutes(fastify) {
         fastify.get('/content-controls/:accountId', (request, reply) => {
             return reply.status(200).send([]);
         });
-        fastify.get('/account/api/public/account', (request, reply) => {
+        fastify.get('/account/api/public/account', (request, reply) => __awaiter(this, void 0, void 0, function* () {
             const { accountId } = request.query;
+            const user = yield user_1.default.findOne({ accountId: accountId });
+            if (!user) {
+                return reply.status(404).send({
+                    error: "arcane.errors.user.not_found",
+                    error_description: "The user was not found in the database",
+                    code: 404
+                });
+            }
             return reply.status(200).send({
-                id: accountId,
-                displayName: accountId,
+                id: user.accountId,
+                displayName: user.username,
                 externalAuth: {}
             });
-        });
-        fastify.get("/account/api/public/account/:accountId", (request, reply) => {
+        }));
+        fastify.get("/account/api/public/account/:accountId", (request, reply) => __awaiter(this, void 0, void 0, function* () {
             const { accountId } = request.params;
+            const user = yield user_1.default.findOne({ accountId: accountId });
+            if (!user) {
+                return reply.status(404).send({
+                    error: "arcane.errors.user.not_found",
+                    error_description: "The user was not found in the database",
+                    code: 404
+                });
+            }
             return reply.status(200).send({
-                id: accountId,
-                displayName: accountId,
-                name: accountId,
-                email: `${accountId}@arcane.dev`,
+                id: user.accountId,
+                displayName: user.username,
+                name: user.username,
+                email: user.email,
                 failedLoginAttempts: 0,
                 lastLogin: Date.now(),
                 numberOfDisplayNameChanges: 0,
@@ -56,7 +76,7 @@ function accountRoutes(fastify) {
                 minorExpected: true,
                 minorStatus: "UNKNOWN",
             });
-        });
+        }));
         fastify.post('/api/v1/user/setting', (request, reply) => {
             return reply.status(200).send({
                 status: "OK",

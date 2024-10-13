@@ -41,26 +41,29 @@ module.exports = {
                 }, {
                     name: "Banned",
                     value: user.banned ? "🔴 Yes" : "🟢 No",
-                    inline: true
+                    inline: true,
                 }, {
                     name: "Account ID",
                     value: `\`${user.accountId}\``,
-                    inline: false
+                    inline: false,
                 }, {
                     name: "Username",
                     value: user.username,
-                    inline: true
+                    inline: true,
                 }, {
                     name: "Email",
                     value: `||${user.email}||`,
-                    inline: true
+                    inline: true,
                 });
                 yield interaction.reply({ embeds: [embed], ephemeral: true });
             }
             catch (error) {
                 console.error("Error executing details command:", error);
-                yield interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                yield interaction.reply({
+                    content: "There was an error while executing this command!",
+                    ephemeral: true,
+                });
             }
         });
-    }
+    },
 };

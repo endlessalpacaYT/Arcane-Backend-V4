@@ -21,18 +21,23 @@ module.exports = {
         .setName("ban")
         .setDescription("Ban someone from ArcaneV4!")
         .setDefaultMemberPermissions(discord_js_1.PermissionFlagsBits.BanMembers)
-        .addStringOption(option => option.setName("username")
+        .addStringOption((option) => option
+        .setName("username")
         .setDescription("Who do you want to ban?")
         .setRequired(true))
-        .addStringOption(option => option.setName("reason")
+        .addStringOption((option) => option
+        .setName("reason")
         .setDescription("Why do you want to ban that user?")
         .setRequired(true)),
     execute(interaction) {
         return __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
-                const reason = interaction.options.getString('reason');
-                const user = yield user_1.default.findOne({ username_lower: (_a = interaction.options.getString('username')) === null || _a === void 0 ? void 0 : _a.toLowerCase() });
+                const reason = interaction.options.getString("reason");
+                const user = yield user_1.default.findOne({
+                    username_lower: (_a = interaction.options
+                        .getString("username")) === null || _a === void 0 ? void 0 : _a.toLowerCase(),
+                });
                 if (!user) {
                     const embed = new discord_js_2.EmbedBuilder()
                         .setColor("#ff0000")
@@ -55,15 +60,15 @@ module.exports = {
                     .addFields({
                     name: "Username",
                     value: user.username,
-                    inline: true
+                    inline: true,
                 }, {
                     name: "Reason",
                     value: reason || "No reason provided",
-                    inline: false
+                    inline: false,
                 });
                 if (process.env.BAN_EMBED_ENABLED === "true") {
                     const channelId = process.env.BAN_EMBED_CHANNELID;
-                    if (typeof channelId === 'string') {
+                    if (typeof channelId === "string") {
                         const banChannel = interaction.client.channels.cache.get(channelId);
                         if (banChannel && banChannel.isTextBased()) {
                             yield banChannel.send({ embeds: [embed] });
@@ -73,12 +78,18 @@ module.exports = {
                         }
                     }
                 }
-                yield interaction.reply({ content: `Successfully banned ${user.username}!`, ephemeral: true });
+                yield interaction.reply({
+                    content: `Successfully banned ${user.username}!`,
+                    ephemeral: true,
+                });
             }
             catch (error) {
                 console.error("Error executing the ban command:", error);
-                yield interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+                yield interaction.reply({
+                    content: "There was an error while executing this command!",
+                    ephemeral: true,
+                });
             }
         });
-    }
+    },
 };

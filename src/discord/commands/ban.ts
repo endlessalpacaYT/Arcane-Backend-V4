@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, Embed, SlashCommandBuilder, TextChannel } from 'discord.js';
+import { ChatInputCommandInteraction, Embed, SlashCommandBuilder, TextChannel, PermissionFlagsBits } from 'discord.js';
 import { EmbedBuilder } from 'discord.js';
 import User from '../../database/models/user';
 require("dotenv").config();
@@ -7,6 +7,7 @@ module.exports = {
     data: new SlashCommandBuilder()
     .setName("ban")
     .setDescription("Ban someone from ArcaneV4!")
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addStringOption(option =>
         option.setName("username")
             .setDescription("Who do you want to ban?")

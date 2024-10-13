@@ -20,6 +20,7 @@ module.exports = {
     data: new discord_js_1.SlashCommandBuilder()
         .setName("ban")
         .setDescription("Ban someone from ArcaneV4!")
+        .setDefaultMemberPermissions(discord_js_1.PermissionFlagsBits.BanMembers)
         .addStringOption(option => option.setName("username")
         .setDescription("Who do you want to ban?")
         .setRequired(true))

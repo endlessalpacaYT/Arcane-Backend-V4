@@ -18,8 +18,6 @@ export async function authRoutes(fastify: FastifyInstance) {
             reply.header('Content-Type', 'application/json');
             const { grant_type } = request.body;
 
-            console.log(request.body);
-
             if (grant_type == "password") {
                 const { username, password, token_type } = request.body;
                 if (!username || !password || !token_type) {

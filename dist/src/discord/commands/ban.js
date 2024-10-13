@@ -40,6 +40,14 @@ module.exports = {
                     yield interaction.reply({ embeds: [embed], ephemeral: true });
                     return;
                 }
+                else if (user.banned) {
+                    const embed = new discord_js_2.EmbedBuilder()
+                        .setColor("#ff0000")
+                        .setTitle("Failed to ban user")
+                        .setDescription("Reason: The user you were trying to ban is allready banned!");
+                    yield interaction.reply({ embeds: [embed], ephemeral: true });
+                }
+                yield user.updateOne({ $set: { banned: true } });
                 const embed = new discord_js_2.EmbedBuilder()
                     .setColor("#a600ff")
                     .setTitle("Someone got hit with the Ban Hammer")
@@ -64,7 +72,7 @@ module.exports = {
                         }
                     }
                 }
-                yield interaction.reply({ embeds: [embed], ephemeral: true });
+                yield interaction.reply({ content: `Successfully banned ${user.username}!`, ephemeral: true });
             }
             catch (error) {
                 console.error("Error executing the ban command:", error);

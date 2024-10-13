@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, SlashCommandBuilder, TextChannel } from 'discord.js';
+import { ChatInputCommandInteraction, Embed, SlashCommandBuilder, TextChannel } from 'discord.js';
 import { EmbedBuilder } from 'discord.js';
 import User from '../../database/models/user';
 require("dotenv").config();
@@ -29,7 +29,16 @@ module.exports = {
                 await interaction.reply({ embeds: [embed], ephemeral: true });
                 return;
             }
+            else if (user.banned) {
+                const embed = new EmbedBuilder()
+                .setColor("#ff0000")
+                .setTitle("Failed to ban user")
+                .setDescription("Reason: The user you were trying to ban is allready banned!")
 
+            await interaction.reply({ embeds: [embed], ephemeral: true});
+            }
+
+            await user.updateOne({ $set: { banned: true} });
             const embed = new EmbedBuilder()
                 .setColor("#a600ff")
                 .setTitle("Someone got hit with the Ban Hammer")
@@ -60,7 +69,7 @@ module.exports = {
                 }
             }
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ content: `Successfully banned ${user.username}!`, ephemeral: true });
         } catch (error) {
             console.error("Error executing the ban command:", error);
             await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });

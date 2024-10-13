@@ -69,7 +69,15 @@ module.exports = {
                 const embed = new discord_js_2.EmbedBuilder()
                     .setColor("#a600ff")
                     .setTitle("Successfully Registered")
-                    .setDescription("Registered With The Username: " + username);
+                    .addFields({
+                    name: "Username",
+                    value: username,
+                    inline: false,
+                }, {
+                    name: "Email Adress",
+                    value: `||${email}||`,
+                    inline: false,
+                });
                 yield interaction.reply({ embeds: [embed], ephemeral: true });
             }
             catch (error) {

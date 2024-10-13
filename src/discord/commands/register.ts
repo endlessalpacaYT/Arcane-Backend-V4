@@ -46,7 +46,8 @@ module.exports = {
                 const embed = new EmbedBuilder()
                     .setColor("#ff0000")
                     .setTitle("Failed To Create An Account!")
-                    .setDescription("Reason: You already created an account!");
+                    .setDescription("Reason: You already created an account!")
+                    
 
                 await interaction.reply({ embeds: [embed], ephemeral: true });
                 return;
@@ -68,7 +69,17 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setColor("#a600ff")
                 .setTitle("Successfully Registered")
-                .setDescription("Registered With The Username: " + username);
+                .addFields({
+                    name: "Username",
+                    value: username,
+                    inline: false,
+                },
+                {
+                    name: "Email Adress",
+                    value: `||${email}||`,
+                    inline: false,
+                }
+            );
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
         } catch (error) {

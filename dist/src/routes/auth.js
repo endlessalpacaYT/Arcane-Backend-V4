@@ -143,12 +143,35 @@ function authRoutes(fastify) {
                 "device_id": "ArcaneV4"
             });
         }));
+        // Route to kill all tokens
         fastify.delete("/account/api/oauth/sessions/kill", (request, reply) => __awaiter(this, void 0, void 0, function* () {
-            reply.header('Content-Type', 'application/json');
-            reply.status(200).send({
-                status: "OK",
-                code: 200
+            // Remove this to enable (NOT RECCOMENDED!)
+            return reply.status(403).send({
+                error: "arcane.errors.common.disabled",
+                error_description: "The route you requested is disabled",
+                code: 403
             });
+            try {
+                const deletedToken = yield token_1.default.deleteMany({});
+                if (deletedToken.deletedCount === 0) {
+                    return reply.code(404).send({
+                        error: 'arcane.errors.token_not_found',
+                        error_description: 'No tokens found to delete',
+                        code: 404
+                    });
+                }
+                console.warn("Session Killed For Everyone!");
+                return reply.status(200).send({
+                    status: "OK",
+                    code: 200
+                });
+            }
+            catch (error) {
+                console.error('Error killing session:', error);
+                return reply.code(500).send({
+                    error: 'SERVER ERROR'
+                });
+            }
         }));
         fastify.delete("/account/api/oauth/sessions/kill/:token", (request, reply) => __awaiter(this, void 0, void 0, function* () {
             const { token } = request.params;

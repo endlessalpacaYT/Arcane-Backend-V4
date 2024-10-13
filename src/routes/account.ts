@@ -1,5 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 
+import User from "../database/models/user";
+
 export async function accountRoutes(fastify: FastifyInstance) {
     fastify.post('/fortnite/api/game/v2/tryPlayOnPlatform/account/:accountId', (request, reply) => {
         reply.header("Content-Type", "text/plain");
@@ -22,24 +24,42 @@ export async function accountRoutes(fastify: FastifyInstance) {
         accountId: string;
     }
 
-    fastify.get('/account/api/public/account', (request: FastifyRequest<{ Querystring: AccountParams }>, reply: FastifyReply) => {
+    fastify.get('/account/api/public/account', async (request: FastifyRequest<{ Querystring: AccountParams }>, reply: FastifyReply) => {
         const { accountId } = request.query;
 
+        const user = await User.findOne({ accountId: accountId });
+        if (!user) {
+            return reply.status(404).send({
+                error: "arcane.errors.user.not_found",
+                error_description: "The user was not found in the database",
+                code: 404
+            })
+        }
+
         return reply.status(200).send({
-            id: accountId,
-            displayName: accountId,
+            id: user.accountId,
+            displayName: user.username,
             externalAuth: {}
         })
     });
 
-    fastify.get("/account/api/public/account/:accountId", (request: FastifyRequest<{ Params: AccountParams }>, reply: FastifyReply) => {
+    fastify.get("/account/api/public/account/:accountId", async (request: FastifyRequest<{ Params: AccountParams }>, reply: FastifyReply) => {
         const { accountId } = request.params;
 
+        const user = await User.findOne({ accountId: accountId });
+        if (!user) {
+            return reply.status(404).send({
+                error: "arcane.errors.user.not_found",
+                error_description: "The user was not found in the database",
+                code: 404
+            })
+        }
+
         return reply.status(200).send({
-          id: accountId,
-          displayName: accountId,
-          name: accountId,
-          email: `${accountId}@arcane.dev`,
+          id: user.accountId,
+          displayName: user.username,
+          name: user.username,
+          email: user.email,
           failedLoginAttempts: 0,
           lastLogin: Date.now(),
           numberOfDisplayNameChanges: 0,

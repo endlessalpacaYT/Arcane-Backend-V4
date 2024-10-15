@@ -5,6 +5,8 @@ import { Client, GatewayIntentBits, ActivityType, CommandInteraction } from "dis
 import fs from "fs";
 import path from "path";
 
+import logger from "../utils/logger";
+
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
 });
@@ -13,7 +15,7 @@ const client = new Client({
 // DEPRECATED USE UPCOMING WEB INTERFACE!
 
 client.once('ready', () => {
-    console.log(`Logged in as ${client.user?.tag}!`);
+    logger.bot(`Logged in as ${client.user?.tag}!`);
     registerCommands();
     setBotStatus();
 });
@@ -35,7 +37,7 @@ async function registerCommands(): Promise<void> {
             Routes.applicationCommands(client.user!.id), 
             { body: commands }
         );
-        console.log('Successfully reloaded application (/) commands.');
+        logger.bot('Successfully reloaded application (/) commands.');
     } catch (error) {
         console.error('Error reloading commands:', error);
     }

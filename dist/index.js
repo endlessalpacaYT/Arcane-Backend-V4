@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = __importDefault(require("fastify"));
 const formbody_1 = __importDefault(require("@fastify/formbody"));
+const logger_1 = __importDefault(require("./src/utils/logger"));
 require("dotenv").config();
 const router_1 = __importDefault(require("./src/utils/router"));
 const connect_1 = __importDefault(require("./src/database/connect"));
@@ -42,7 +43,7 @@ router_1.default.registerRoutes(fastify);
 function startHTTPServer() {
     try {
         fastify.listen({ port: Number(PORT), host: IP });
-        console.log(`Arcane Listening On: http://${IP}:${PORT}`);
+        logger_1.default.backend(`Arcane Listening On: http://${IP}:${PORT}`);
     }
     catch (err) {
         fastify.log.error(err);

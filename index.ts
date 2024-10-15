@@ -2,6 +2,7 @@ import { warn } from 'console';
 import Fastify from 'fastify';
 import mongoose from 'mongoose';
 import formbody from '@fastify/formbody';
+import logger from "./src/utils/logger";
 require("dotenv").config();
 
 import router from "./src/utils/router";
@@ -38,7 +39,7 @@ router.registerRoutes(fastify);
 function startHTTPServer() {
     try {
         fastify.listen({ port: Number(PORT), host: IP });
-        console.log(`Arcane Listening On: http://${IP}:${PORT}`);
+        logger.backend(`Arcane Listening On: http://${IP}:${PORT}`);
       } catch (err) {
         fastify.log.error(err);
         process.exit(1);

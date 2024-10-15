@@ -19,6 +19,7 @@ const v9_1 = require("discord-api-types/v9");
 const discord_js_1 = require("discord.js");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const logger_1 = __importDefault(require("../utils/logger"));
 const client = new discord_js_1.Client({
     intents: [discord_js_1.GatewayIntentBits.Guilds, discord_js_1.GatewayIntentBits.GuildMessages, discord_js_1.GatewayIntentBits.MessageContent]
 });
@@ -26,7 +27,7 @@ const client = new discord_js_1.Client({
 // DEPRECATED USE UPCOMING WEB INTERFACE!
 client.once('ready', () => {
     var _a;
-    console.log(`Logged in as ${(_a = client.user) === null || _a === void 0 ? void 0 : _a.tag}!`);
+    logger_1.default.bot(`Logged in as ${(_a = client.user) === null || _a === void 0 ? void 0 : _a.tag}!`);
     registerCommands();
     setBotStatus();
 });
@@ -42,7 +43,7 @@ function registerCommands() {
         const rest = new rest_1.REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
         try {
             yield rest.put(v9_1.Routes.applicationCommands(client.user.id), { body: commands });
-            console.log('Successfully reloaded application (/) commands.');
+            logger_1.default.bot('Successfully reloaded application (/) commands.');
         }
         catch (error) {
             console.error('Error reloading commands:', error);

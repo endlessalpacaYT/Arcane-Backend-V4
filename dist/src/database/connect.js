@@ -13,11 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+const logger_1 = __importDefault(require("../utils/logger"));
 function connectDB(MONGO_URI) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(MONGO_URI);
-            console.log(`MongoDB Connected To: ${MONGO_URI}`);
+            logger_1.default.database(`MongoDB Connected To: ${MONGO_URI}`);
         }
         catch (err) {
             console.error(`Failed to connect to MongoDB: ${err}`);

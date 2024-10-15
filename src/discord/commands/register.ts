@@ -1,6 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { EmbedBuilder } from "discord.js";
 import User from "../../database/models/user";
+import profileman from "../../utils/user/profileman";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
@@ -71,7 +72,7 @@ module.exports = {
         email: email,
         password: hashedPassword,
       });
-
+      profileman.createProfile(newUser.accountId);
       await newUser.save();
 
       const embed = new EmbedBuilder()

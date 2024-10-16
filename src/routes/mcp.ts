@@ -44,6 +44,7 @@ export async function mcpRoutes(fastify: FastifyInstance) {
                 profileman.updateProfileRvn(rvnNumber, "creative", accountId)
                 return reply.status(200).send(profile.profiles.athena);
             } else {
+                console.log(request.query.profileId);
                 return reply.status(200).send({
                     status: "OK",
                     code: 200

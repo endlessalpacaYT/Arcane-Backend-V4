@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const discord_js_2 = require("discord.js");
 const user_1 = __importDefault(require("../../database/models/user"));
+const profileman_1 = __importDefault(require("../../utils/user/profileman"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const uuid_1 = require("uuid");
 module.exports = {
@@ -71,6 +72,7 @@ module.exports = {
                     email: email,
                     password: hashedPassword,
                 });
+                profileman_1.default.createProfile(newUser.accountId);
                 yield newUser.save();
                 const embed = new discord_js_2.EmbedBuilder()
                     .setColor("#a600ff")

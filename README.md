@@ -4,7 +4,7 @@
 ## Project Stack: (Will Most Likely Change)
 - Language: Typescript
 
-## Planned Features  
+## Features  
 - [x] Login system  
 - [x] Easy setup  
 - [ ] Database (MongoDB) 
@@ -32,15 +32,14 @@
 - [ ] Seasonal events (Christmas, Halloween)  
 - [ ] Player stats tracking 
 - [ ] WebSockets for real-time communication
-
-## Maybe Features?  
 - [ ] IP Bans (ban based on IP address) 
 - [ ] Private lobbies for custom games  
 - [ ] Cross-platform matchmaking  
 - [ ] Competitive matchmaking and leaderboards  
 - [ ] Tournament support
+- [ ] Save The World
 
-## Planned Bot Commands  
+## Bot Commands  
 - [x] Register command (for creating new accounts)  
 - [x] Ping command (for checking bot responsiveness)  
 - [x] User lookup command (check user stats and profile)  

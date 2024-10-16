@@ -107,7 +107,48 @@ async function updateProfileRvn(rvnNumber: number, profileId: string, accountId:
     await profile.save();
 }
 
+async function getProfile(profileId: string, accountId: string) {
+    const profile = await Profiles.findOne({ accountId: accountId });
+    if (!profile) {
+        console.error("No profile with the accountId: " + accountId);
+        return null;
+    }
+
+    switch (profileId) {
+        case "athena":
+            return profile.profiles.athena;
+        case "campaign":
+            return profile.profiles.campaign;
+        case "collection_book_people0":
+            return profile.profiles.collection_book_people0;
+        case "collection_book_schematics0":
+            return profile.profiles.collection_book_schematics0;
+        case "collections":
+            return profile.profiles.collections;
+        case "common_core":
+            return profile.profiles.common_core;
+        case "common_public":
+            return profile.profiles.common_public;
+        case "creative":
+            return profile.profiles.creative;
+        case "eventData":
+            return profile.profiles.eventData;
+        case "metadata":
+            return profile.profiles.metadata;
+        case "outpost0":
+            return profile.profiles.outpost0;
+        case "profile0":
+            return profile.profiles.profile0;
+        case "theater0":
+            return profile.profiles.theater0;
+        default:
+            console.warn(profileId + ": Not Found");
+            return null;  
+    }
+}
+
 export default {
     createProfile,
-    updateProfileRvn
+    updateProfileRvn,
+    getProfile
 }

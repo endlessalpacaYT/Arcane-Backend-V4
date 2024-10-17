@@ -5,6 +5,7 @@ import profileman from "../utils/user/profileman";
 import User from "../database/models/user";
 
 import QueryProfile from "../operations/QueryProfile";
+import ClientQuestLogin from "../operations/ClientQuestLogin";
 
 const athena = require("../responses/DefaultProfiles/athena.json")
 const common_public = require("../responses/DefaultProfiles/common_public.json")
@@ -23,7 +24,6 @@ export async function mcpRoutes(fastify: FastifyInstance) {
     
     fastify.post('/fortnite/api/game/v2/profile/:accountId/client/:operation', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile }>, reply: FastifyReply) => {
         try {
-            console.log(request.url);
             const { accountId, operation } = request.params;
             const { profileId, rvn } = request.query;
 
@@ -32,10 +32,8 @@ export async function mcpRoutes(fastify: FastifyInstance) {
                     const queryProfile = await QueryProfile.QueryProfile(accountId, profileId, Number(rvn));
                     return reply.status(200).send({queryProfile})
                 case "ClientQuestLogin":
-                    return reply.status(200).send({
-                        status: "OK",
-                        code: 200
-                    })
+                    const clientQuestLogin = await ClientQuestLogin.ClientQuestLogin(accountId, profileId, Number(rvn));
+                    return reply.status(200).send({clientQuestLogin})
                 case "SetMtxPlatform":
                     return reply.status(200).send({
                         status: "OK",

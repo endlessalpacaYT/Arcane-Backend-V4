@@ -25,26 +25,10 @@ export async function eventRoutes(fastify: FastifyInstance) {
             const { subgroupName, subgroupValue } = request.body;
             console.log(request.body);
 
-            let profile = await Profile.findOne({ accountId: accountId });
-            if (!profile) {
-                profile = await profileman.createProfile(accountId);
-            }
-
-            if (subgroupName == "GeoIdentity") {
-                profile.profiles.eventData.subGroups.GeoIdentity.subgroupValue = subgroupValue;
-                profile.markModified('profiles.eventData.subGroups.GeoIdentity.subgroupValue');
-                console.log("Changed GeoIdentity To: " + subgroupValue);
-                await profile.save();
-                return reply.status(200).send({
-                    subgroupValue: profile.profiles.eventData.subGroups.GeoIdentity.subgroupValue
-                })
-            } else {
-                return reply.status(404).send({
-                    error: "arcane.errors.subgroup.not_found",
-                    error_description: "The subgroup was not found!",
-                    code: 404
-                })
-            }
+            return reply.status(200).send({
+                status: "OK",
+                code: 200
+            })
         } catch (err) {
             console.error(err);
             return reply.status(500).send({

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mcpRoutes = mcpRoutes;
+const Fallback_1 = __importDefault(require("../operations/Fallback"));
 const QueryProfile_1 = __importDefault(require("../operations/QueryProfile"));
 const ClientQuestLogin_1 = __importDefault(require("../operations/ClientQuestLogin"));
 const athena = require("../responses/DefaultProfiles/athena.json");
@@ -20,35 +21,41 @@ const common_public = require("../responses/DefaultProfiles/common_public.json")
 const common_core = require("../responses/DefaultProfiles/common_core.json");
 function mcpRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/QueryProfile', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const queryProfile = yield QueryProfile_1.default.QueryProfile(accountId, profileId, Number(rvn));
+                return reply.status(200).send(queryProfile);
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/ClientQuestLogin', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const clientQuestLogin = yield ClientQuestLogin_1.default.ClientQuestLogin(accountId, profileId, Number(rvn));
+                return reply.status(200).send({ clientQuestLogin });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
         fastify.post('/fortnite/api/game/v2/profile/:accountId/client/:operation', (request, reply) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { accountId, operation } = request.params;
                 const { profileId, rvn } = request.query;
-                switch (operation) {
-                    case "QueryProfile":
-                        const queryProfile = yield QueryProfile_1.default.QueryProfile(accountId, profileId, Number(rvn));
-                        return reply.status(200).send({ queryProfile });
-                    case "ClientQuestLogin":
-                        const clientQuestLogin = yield ClientQuestLogin_1.default.ClientQuestLogin(accountId, profileId, Number(rvn));
-                        return reply.status(200).send({ clientQuestLogin });
-                    case "SetMtxPlatform":
-                        return reply.status(200).send({
-                            status: "OK",
-                            code: 200
-                        });
-                    case "ClaimMfaEnabled":
-                        return reply.status(200).send({
-                            status: "OK",
-                            code: 200
-                        });
-                    default:
-                        console.warn(`Operation ${operation} is not supported`);
-                        return reply.status(400).send({
-                            error: 'arcane.errors.operation.unknown',
-                            error_description: `Operation ${operation} is not supported`,
-                            code: 400
-                        });
-                }
+                console.warn(`Operation ${operation} is not supported`);
+                const fallback = yield Fallback_1.default.Fallback(accountId, profileId, Number(rvn));
+                return reply.status(200).send({ fallback });
             }
             catch (err) {
                 console.error(err);

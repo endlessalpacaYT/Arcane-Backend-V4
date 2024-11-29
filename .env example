@@ -11,3 +11,6 @@ BOT_TOKEN=
 # false =  no embed true = embed will get send if there is a channel ID in BAN_EMBED_CHANNELID=
 BAN_EMBED_ENABLED=
 BAN_EMBED_CHANNELID=
+
+# Authentication Settings:
+JWT_SECRET=ArcaneV4

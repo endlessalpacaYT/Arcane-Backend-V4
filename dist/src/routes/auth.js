@@ -13,10 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authRoutes = authRoutes;
+require("dotenv").config();
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const crypto_1 = __importDefault(require("crypto"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_1 = __importDefault(require("../database/models/user"));
-const token_1 = __importDefault(require("../database/models/token"));
+const jwt_secret = process.env.JWT_SECRET;
 function authRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
         fastify.post('/account/api/oauth/token', (request, reply) => __awaiter(this, void 0, void 0, function* () {
@@ -48,33 +49,27 @@ function authRoutes(fastify) {
                             code: 403
                         });
                     }
-                    let current_token = yield token_1.default.findOne({ accountId: user.accountId });
-                    if (!current_token || new Date() > current_token.expiresAt) {
-                        const newAccessToken = crypto_1.default.randomBytes(32).toString('hex');
-                        const newRefreshToken = crypto_1.default.randomBytes(32).toString('hex');
-                        if (current_token) {
-                            current_token.token = token_type + "~" + newAccessToken;
-                            current_token.expiresAt = new Date(Date.now() + 28800 * 1000);
-                            current_token.refreshToken = newRefreshToken;
-                            current_token.refreshExpiresAt = new Date(Date.now() + 86400 * 1000);
-                        }
-                        else {
-                            current_token = new token_1.default({
-                                token: token_type + "~" + newAccessToken,
-                                accountId: user.accountId,
-                                expiresAt: new Date(Date.now() + 28800 * 1000),
-                                refreshToken: newRefreshToken,
-                                refreshExpiresAt: new Date(Date.now() + 86400 * 1000)
-                            });
-                        }
-                        yield current_token.save();
+                    if (!jwt_secret) {
+                        return reply.status(403).send({
+                            error: "arcane.errors.token.invalid",
+                            error_description: "The token system had an error",
+                            code: 403
+                        });
                     }
+                    const refresh_token = jsonwebtoken_1.default.sign({
+                        accountId: user.accountId
+                    }, jwt_secret, { expiresIn: "24h" });
+                    const access_token = jsonwebtoken_1.default.sign({
+                        accountId: user.accountId,
+                        username: user.username,
+                        refresh_token: `eg1~${refresh_token}`,
+                    }, jwt_secret, { expiresIn: "8h" });
                     return reply.status(200).send({
-                        "access_token": current_token.token,
+                        "access_token": `eg1~${access_token}`,
                         "expires_in": 28800,
                         "expires_at": "9999-12-02T01:12:01.100Z",
                         "token_type": "bearer",
-                        "refresh_token": "ArcaneV4",
+                        "refresh_token": `eg1~${refresh_token}`,
                         "refresh_expires": 86400,
                         "refresh_expires_at": "9999-12-02T01:12:01.100Z",
                         "account_id": user.accountId,
@@ -132,94 +127,51 @@ function authRoutes(fastify) {
                     error_description: 'Authorization token is required'
                 });
             }
-            const token = authorization.split(' ')[1];
-            const userToken = yield token_1.default.findOne({ token: token });
-            if (!userToken) {
-                return reply.status(404).send({
-                    error: "arcane.errors.token.not_found",
-                    error_description: "The token was not found in the database",
-                    code: 404
+            if (!jwt_secret) {
+                return reply.status(403).send({
+                    error: "arcane.errors.token.invalid",
+                    error_description: "The token system had an error",
+                    code: 403
                 });
             }
-            const user = yield user_1.default.findOne({ accountId: userToken.accountId });
-            if (!user) {
-                return reply.status(404).send({
-                    error: "arcane.errors.user.not_found",
-                    error_description: "The user was not found in the database",
-                    code: 404
+            const token = authorization.replace("bearer ", "");
+            const userToken = jsonwebtoken_1.default.verify(token.replace("eg1~", ""), jwt_secret);
+            if (typeof userToken === "string" || !userToken) {
+                return reply.status(403).send({
+                    error: "arcane.errors.token.invalid",
+                    error_description: "The token system had an error",
+                    code: 403
                 });
             }
             return reply.status(200).send({
-                "access_token": userToken.token,
+                "access_token": token,
                 "expires_in": 28800,
                 "expires_at": "9999-12-02T01:12:01.100Z",
                 "token_type": "bearer",
-                "refresh_token": "ArcaneV4",
+                "refresh_token": userToken.refresh_token,
                 "refresh_expires": 86400,
                 "refresh_expires_at": "9999-12-02T01:12:01.100Z",
-                "account_id": user.accountId,
+                "account_id": userToken.accountId,
                 "client_id": "ArcaneV4",
                 "internal_client": true,
                 "client_service": "fortnite",
-                "displayName": user.username,
+                "displayName": userToken.username,
                 "app": "fortnite",
-                "in_app_id": user.accountId,
-                "device_id": user.accountId
+                "in_app_id": userToken.accountId,
+                "device_id": userToken.accountId
             });
         }));
-        // Route to kill all tokens
         fastify.delete("/account/api/oauth/sessions/kill", (request, reply) => __awaiter(this, void 0, void 0, function* () {
-            // Remove this to enable (NOT RECCOMENDED!)
-            return reply.status(403).send({
-                error: "arcane.errors.common.disabled",
-                error_description: "The route you requested is disabled",
-                code: 403
+            return reply.status(200).send({
+                status: "OK",
+                code: 200
             });
-            try {
-                const deletedToken = yield token_1.default.deleteMany({});
-                if (deletedToken.deletedCount === 0) {
-                    return reply.code(404).send({
-                        error: 'arcane.errors.token_not_found',
-                        error_description: 'No tokens found to delete',
-                        code: 404
-                    });
-                }
-                console.warn("Session Killed For Everyone!");
-                return reply.status(200).send({
-                    status: "OK",
-                    code: 200
-                });
-            }
-            catch (error) {
-                console.error('Error killing session:', error);
-                return reply.code(500).send({
-                    error: 'SERVER ERROR'
-                });
-            }
         }));
         fastify.delete("/account/api/oauth/sessions/kill/:token", (request, reply) => __awaiter(this, void 0, void 0, function* () {
-            const { token } = request.params;
-            try {
-                const deletedToken = yield token_1.default.findOneAndDelete({ token: token });
-                if (!deletedToken) {
-                    return reply.code(404).send({
-                        error: 'arcane.errors.token_not_found',
-                        error_description: 'Token not found',
-                        code: 404
-                    });
-                }
-                console.log("Session Killed For:", token);
-                return reply.status(200).send({
-                    status: "OK",
-                    code: 200
-                });
-            }
-            catch (error) {
-                console.error('Error killing session:', error);
-                return reply.code(500).send({
-                    error: 'SERVER ERROR'
-                });
-            }
+            return reply.status(200).send({
+                status: "OK",
+                code: 200
+            });
         }));
     });
 }

@@ -4,6 +4,7 @@ import profileman from "../utils/user/profileman";
 
 import User from "../database/models/user";
 
+import Fallback from '../operations/Fallback';
 import QueryProfile from "../operations/QueryProfile";
 import ClientQuestLogin from "../operations/ClientQuestLogin";
 
@@ -21,37 +22,47 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         profileId: string;
         rvn: string;
     }
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/QueryProfile', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile }>, reply: FastifyReply) => {
+        try {
+            const { accountId } = request.params;
+            const { profileId, rvn } = request.query;
+            console.log(request.body);
+
+            const queryProfile = await QueryProfile.QueryProfile(accountId, profileId, Number(rvn));
+            return reply.status(200).send(queryProfile);
+        } catch (err) {
+            console.error(err);
+            return reply.status(500).send({
+                error: "SERVER ERROR"
+            });
+        }
+    });
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/ClientQuestLogin', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile }>, reply: FastifyReply) => {
+        try {
+            const { accountId } = request.params;
+            const { profileId, rvn } = request.query;
+
+            const clientQuestLogin = await ClientQuestLogin.ClientQuestLogin(accountId, profileId, Number(rvn));
+            return reply.status(200).send({clientQuestLogin})
+        } catch (err) {
+            console.error(err);
+            return reply.status(500).send({
+                error: "SERVER ERROR"
+            });
+        }
+    });
     
     fastify.post('/fortnite/api/game/v2/profile/:accountId/client/:operation', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile }>, reply: FastifyReply) => {
         try {
             const { accountId, operation } = request.params;
             const { profileId, rvn } = request.query;
+            console.log(request.body);
 
-            switch (operation) {
-                case "QueryProfile":
-                    const queryProfile = await QueryProfile.QueryProfile(accountId, profileId, Number(rvn));
-                    return reply.status(200).send({queryProfile})
-                case "ClientQuestLogin":
-                    const clientQuestLogin = await ClientQuestLogin.ClientQuestLogin(accountId, profileId, Number(rvn));
-                    return reply.status(200).send({clientQuestLogin})
-                case "SetMtxPlatform":
-                    return reply.status(200).send({
-                        status: "OK",
-                        code: 200
-                    }) 
-                case "ClaimMfaEnabled":
-                    return reply.status(200).send({
-                        status: "OK",
-                        code: 200
-                    }) 
-                default:
-                    console.warn(`Operation ${operation} is not supported`);
-                    return reply.status(400).send({
-                        error: 'arcane.errors.operation.unknown',
-                        error_description: `Operation ${operation} is not supported`,
-                        code: 400
-                    });
-            }
+            console.warn(`Operation ${operation} is not supported`);
+            const fallback = await Fallback.Fallback(accountId, profileId, Number(rvn));
+            return reply.status(200).send({fallback})
         } catch (err) {
             console.error(err);
             return reply.status(500).send({

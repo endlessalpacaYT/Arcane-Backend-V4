@@ -90,7 +90,6 @@ export async function accountRoutes(fastify: FastifyInstance) {
     })
 
     fastify.get('/presence/api/v1/_/:accountId/settings/subscriptions', (request, reply) => {
-        console.log(request.url);
         return reply.status(200).send([])
     })
 

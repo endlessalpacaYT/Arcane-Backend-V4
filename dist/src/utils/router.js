@@ -16,6 +16,7 @@ const stats_1 = require("../routes/stats");
 const event_1 = require("../routes/event");
 const content_1 = require("../routes/content");
 const receipts_1 = require("../routes/receipts");
+const waitingroom_1 = require("../routes/waitingroom");
 function registerRoutes(fastify) {
     (0, default_1.defaultRoutes)(fastify);
     (0, auth_1.authRoutes)(fastify);
@@ -33,6 +34,7 @@ function registerRoutes(fastify) {
     (0, event_1.eventRoutes)(fastify);
     (0, content_1.contentRoutes)(fastify);
     (0, receipts_1.receiptRoutes)(fastify);
+    (0, waitingroom_1.waitingroom)(fastify);
 }
 exports.default = {
     registerRoutes

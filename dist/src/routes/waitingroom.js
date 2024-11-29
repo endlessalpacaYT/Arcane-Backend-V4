@@ -9,13 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defaultRoutes = defaultRoutes;
-function defaultRoutes(fastify) {
+exports.waitingroom = waitingroom;
+function waitingroom(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
-        fastify.all('/', (request, reply) => __awaiter(this, void 0, void 0, function* () {
-            return reply.status(200).send({
-                backend: "ArcaneBackendV4"
+        fastify.get('/waitingroom/api/waitingroom', (request, reply) => {
+            reply.status(204).send();
+        });
+        fastify.get('/launcher-resources/waitingroom/*', (request, reply) => {
+            reply.status(200).send({
+                status: "OK",
+                code: 200
             });
-        }));
+        });
     });
 }

@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
     {
         created: { type: Date, required: true },
         banned: { type: Boolean, default: false },
-        discordId: { type: String, required: true, unique: true },
+        discordId: { type: String, required: false, unique: true },
         accountId: { type: String, required: true, unique: true },
         username: { type: String, required: true, unique: true },
         username_lower: { type: String, required: true, unique: true },

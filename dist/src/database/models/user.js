@@ -7,7 +7,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const UserSchema = new mongoose_1.default.Schema({
     created: { type: Date, required: true },
     banned: { type: Boolean, default: false },
-    discordId: { type: String, required: true, unique: true },
+    discordId: { type: String, required: false, unique: true },
     accountId: { type: String, required: true, unique: true },
     username: { type: String, required: true, unique: true },
     username_lower: { type: String, required: true, unique: true },

@@ -16,6 +16,7 @@ import { statsRoutes } from '../routes/stats';
 import { eventRoutes } from '../routes/event';
 import { contentRoutes } from '../routes/content';
 import { receiptRoutes } from '../routes/receipts';
+import { waitingroom } from '../routes/waitingroom';
 
 function registerRoutes(fastify: FastifyInstance) {
     defaultRoutes(fastify)
@@ -34,6 +35,7 @@ function registerRoutes(fastify: FastifyInstance) {
     eventRoutes(fastify);
     contentRoutes(fastify);
     receiptRoutes(fastify);
+    waitingroom(fastify);
 }
 
 export default {

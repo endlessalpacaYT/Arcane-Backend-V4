@@ -7,7 +7,7 @@
 ## Features  
 - [x] Login system  
 - [x] Easy setup  
-- [ ] Database (MongoDB) 
+- [x] Database (MongoDB) 
 - [ ] Auto shop (purchasing skins and items)  
 - [ ] Full Battle Pass integration  
 - [ ] Challenges system (daily and weekly challenges)  
@@ -16,7 +16,7 @@
 - [ ] Working MCP
 - [ ] NewsV1 (Fortnite in-game news system) 
 - [ ] NewsV2 (Fortnite in-game news system)  
-- [ ] Discord Bot Integration  
+- [x] Discord Bot Integration  
 - [ ] Matchmaker (matchmaking system)  
 - [ ] Party V1 (basic party system)  
 - [ ] Party V2 (advanced party system with cross-play)  

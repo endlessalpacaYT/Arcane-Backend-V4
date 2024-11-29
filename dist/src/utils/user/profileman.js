@@ -21,7 +21,6 @@ const collections = require("../../responses/DefaultProfiles/collections.json");
 const common_public = require("../../responses/DefaultProfiles/common_public.json");
 const common_core = require("../../responses/DefaultProfiles/common_core.json");
 const creative = require("../../responses/DefaultProfiles/creative.json");
-const eventData = require("../../responses/DefaultProfiles/eventData.json");
 const metadata = require("../../responses/DefaultProfiles/metadata.json");
 const outpost0 = require("../../responses/DefaultProfiles/outpost0.json");
 const profile0 = require("../../responses/DefaultProfiles/profile0.json");
@@ -40,7 +39,6 @@ function createProfile(accountId) {
                 common_public: common_public,
                 common_core: common_core,
                 creative: creative,
-                eventData: eventData,
                 metadata: metadata,
                 outpost0: outpost0,
                 profile0: profile0,
@@ -55,7 +53,6 @@ function createProfile(accountId) {
         profile.profiles.common_public.accountId = accountId;
         profile.profiles.common_core.accountId = accountId;
         profile.profiles.creative.accountId = accountId;
-        profile.profiles.eventData.accountId = accountId;
         profile.profiles.metadata.accountId = accountId;
         profile.profiles.outpost0.accountId = accountId;
         profile.profiles.profile0.accountId = accountId;
@@ -96,9 +93,6 @@ function updateProfileRvn(rvnNumber, profileId, accountId) {
             case "creative":
                 profile.profiles.creative.rvn = rvnNumber;
                 break;
-            case "creative":
-                profile.profiles.eventData.rvn = rvnNumber;
-                break;
             case "metadata":
                 profile.profiles.metadata.rvn = rvnNumber;
                 break;
@@ -118,7 +112,46 @@ function updateProfileRvn(rvnNumber, profileId, accountId) {
         yield profile.save();
     });
 }
+function getProfile(profileId, accountId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const profile = yield profiles_1.default.findOne({ accountId: accountId });
+        if (!profile) {
+            console.error("No profile with the accountId: " + accountId);
+            return null;
+        }
+        switch (profileId) {
+            case "athena":
+                return profile.profiles.athena;
+            case "campaign":
+                return profile.profiles.campaign;
+            case "collection_book_people0":
+                return profile.profiles.collection_book_people0;
+            case "collection_book_schematics0":
+                return profile.profiles.collection_book_schematics0;
+            case "collections":
+                return profile.profiles.collections;
+            case "common_core":
+                return profile.profiles.common_core;
+            case "common_public":
+                return profile.profiles.common_public;
+            case "creative":
+                return profile.profiles.creative;
+            case "metadata":
+                return profile.profiles.metadata;
+            case "outpost0":
+                return profile.profiles.outpost0;
+            case "profile0":
+                return profile.profiles.profile0;
+            case "theater0":
+                return profile.profiles.theater0;
+            default:
+                console.warn(profileId + ": Not Found");
+                return null;
+        }
+    });
+}
 exports.default = {
     createProfile,
-    updateProfileRvn
+    updateProfileRvn,
+    getProfile
 };

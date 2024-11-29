@@ -87,6 +87,7 @@ function accountRoutes(fastify) {
             return reply.status(200).send([]);
         });
         fastify.get('/presence/api/v1/_/:accountId/settings/subscriptions', (request, reply) => {
+            console.log(request.url);
             return reply.status(200).send([]);
         });
         fastify.get('/fortnite/api/game/v2/privacy/account/:accountId', (request, reply) => {

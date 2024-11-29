@@ -22,17 +22,37 @@ function eventRoutes(fastify) {
         });
         // i swear man these route definitions are getting so long grr
         fastify.post('/fortnite/api/game/v2/events/v2/setSubgroup/:accountId', (request, reply) => __awaiter(this, void 0, void 0, function* () {
-            const { accountId } = request.params;
-            const { subgroupName } = request.body;
-            console.log(request.body);
-            let profile = yield profiles_1.default.findOne({ accountId: accountId });
-            if (!profile) {
-                profile = yield profileman_1.default.createProfile(accountId);
+            try {
+                const { accountId } = request.params;
+                const { subgroupName, subgroupValue } = request.body;
+                console.log(request.body);
+                let profile = yield profiles_1.default.findOne({ accountId: accountId });
+                if (!profile) {
+                    profile = yield profileman_1.default.createProfile(accountId);
+                }
+                if (subgroupName == "GeoIdentity") {
+                    profile.profiles.eventData.subGroups.GeoIdentity.subgroupValue = subgroupValue;
+                    profile.markModified('profiles.eventData.subGroups.GeoIdentity.subgroupValue');
+                    console.log("Changed GeoIdentity To: " + subgroupValue);
+                    yield profile.save();
+                    return reply.status(200).send({
+                        subgroupValue: profile.profiles.eventData.subGroups.GeoIdentity.subgroupValue
+                    });
+                }
+                else {
+                    return reply.status(404).send({
+                        error: "arcane.errors.subgroup.not_found",
+                        error_description: "The subgroup was not found!",
+                        code: 404
+                    });
+                }
             }
-            return reply.status(200).send({
-                status: "OK",
-                code: 200
-            });
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
         }));
     });
 }

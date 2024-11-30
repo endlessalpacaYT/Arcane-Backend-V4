@@ -13,7 +13,7 @@
 - [ ] Challenges system (daily and weekly challenges)  
 - [ ] Friends system (add/remove/block friends)  
 - [ ] XMPP  
-- [ ] Working MCP
+- [x] Working MCP (10%)
 - [ ] NewsV1 (Fortnite in-game news system) 
 - [ ] NewsV2 (Fortnite in-game news system)  
 - [x] Discord Bot Integration  
@@ -28,7 +28,7 @@
 - [ ] Frontend for managing backend  
 - [x] Universal backend (multi-version support)  
 - [ ] API for external integrations  
-- [ ] Player inventory management  
+- [x] Player inventory management  
 - [ ] Seasonal events (Christmas, Halloween)  
 - [ ] Player stats tracking 
 - [ ] WebSockets for real-time communication

@@ -10,7 +10,13 @@ interface Memory {
     lobby: string;
 }
 
-async function ClientQuestLogin(accountId: string, profileId: string, rvn: number, memory: Memory) {
+interface Body {
+    lockerItem: string,
+    bannerIconTemplateName: string,
+    bannerColorTemplateName: string
+}
+
+async function SetCosmeticLockerBanner(accountId: string, profileId: string, rvn: number, body: Body, memory: Memory) {
     let profiles: any = await Profiles.findOne({ accountId: accountId });
     if (!profiles) {
         console.log(
@@ -39,6 +45,31 @@ async function ClientQuestLogin(accountId: string, profileId: string, rvn: numbe
     let ProfileRevisionCheck = (memory.build >= 12.20) ? profile.commandRevision : profile.rvn;
     let QueryRevision = rvn || -1;
 
+    profile.items[body.lockerItem].attributes.banner_icon_template = body.bannerIconTemplateName;
+    profile.items[body.lockerItem].attributes.banner_color_template = body.bannerColorTemplateName;
+
+    ApplyProfileChanges.push({
+        "changeType": "itemAttrChanged",
+        "itemId": body.lockerItem,
+        "attributeName": "banner_icon_template",
+        "attributeValue": profile.items[body.lockerItem].attributes.banner_icon_template
+    });
+
+    ApplyProfileChanges.push({
+        "changeType": "itemAttrChanged",
+        "itemId": body.lockerItem,
+        "attributeName": "banner_color_template",
+        "attributeValue": profile.items[body.lockerItem].attributes.banner_color_template
+    });
+
+    if (ApplyProfileChanges.length > 0) {
+        profile.rvn += 1;
+        profile.commandRevision += 1;
+        profile.updated = new Date().toISOString();
+
+        await profiles.updateOne({ $set: { [`profiles.${profileId}`]: profile } });
+    }
+
     if (QueryRevision != ProfileRevisionCheck) {
         ApplyProfileChanges = [{
             "changeType": "fullProfileUpdate",
@@ -61,5 +92,5 @@ async function ClientQuestLogin(accountId: string, profileId: string, rvn: numbe
 }
 
 export default {
-    ClientQuestLogin
+    SetCosmeticLockerBanner
 }

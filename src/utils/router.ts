@@ -6,6 +6,7 @@ import { mcpRoutes } from '../routes/mcp';
 import { storefrontRoutes } from '../routes/storefront';
 import { defaultRoutes } from '../routes/default';
 import { dataRoutes } from '../routes/datarouter';
+import { matchmaker } from '../routes/matchmaker';
 import { feedbackRoutes } from '../routes/feedback';
 import { versionRoutes } from '../routes/version';
 import { cloudstorageRoutes } from '../routes/cloudstorage';
@@ -25,6 +26,7 @@ function registerRoutes(fastify: FastifyInstance) {
     mcpRoutes(fastify);
     storefrontRoutes(fastify);
     dataRoutes(fastify);
+    matchmaker(fastify);
     feedbackRoutes(fastify);
     versionRoutes(fastify);
     cloudstorageRoutes(fastify);

@@ -6,6 +6,7 @@ const mcp_1 = require("../routes/mcp");
 const storefront_1 = require("../routes/storefront");
 const default_1 = require("../routes/default");
 const datarouter_1 = require("../routes/datarouter");
+const matchmaker_1 = require("../routes/matchmaker");
 const feedback_1 = require("../routes/feedback");
 const version_1 = require("../routes/version");
 const cloudstorage_1 = require("../routes/cloudstorage");
@@ -24,6 +25,7 @@ function registerRoutes(fastify) {
     (0, mcp_1.mcpRoutes)(fastify);
     (0, storefront_1.storefrontRoutes)(fastify);
     (0, datarouter_1.dataRoutes)(fastify);
+    (0, matchmaker_1.matchmaker)(fastify);
     (0, feedback_1.feedbackRoutes)(fastify);
     (0, version_1.versionRoutes)(fastify);
     (0, cloudstorage_1.cloudstorageRoutes)(fastify);

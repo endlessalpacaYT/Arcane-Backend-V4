@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const profileman_1 = __importDefault(require("../utils/user/profileman"));
 const profiles_1 = __importDefault(require("../database/models/profiles"));
-function ClientQuestLogin(accountId, profileId, rvn, memory) {
+function RefreshExpeditions(accountId, profileId, rvn, memory) {
     return __awaiter(this, void 0, void 0, function* () {
         let profiles = yield profiles_1.default.findOne({ accountId: accountId });
         if (!profiles) {
@@ -30,6 +30,10 @@ function ClientQuestLogin(accountId, profileId, rvn, memory) {
             return {
                 error: "arcane.errors.profile.not_found",
             };
+        }
+        if (profile.rvn == profile.commandRevision) {
+            profile.rvn += 1;
+            yield profiles.updateOne({ $set: { [`profiles.${profileId}`]: profile } });
         }
         let multiUpdate = [];
         let ApplyProfileChanges = [];
@@ -56,5 +60,5 @@ function ClientQuestLogin(accountId, profileId, rvn, memory) {
     });
 }
 exports.default = {
-    ClientQuestLogin
+    RefreshExpeditions
 };

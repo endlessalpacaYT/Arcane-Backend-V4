@@ -14,23 +14,74 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const profileman_1 = __importDefault(require("../utils/user/profileman"));
 const profiles_1 = __importDefault(require("../database/models/profiles"));
-// dont rlly know if i need anything else here tbh
-function QueryProfile(accountId, profileId, rvn) {
+function QueryProfile(accountId, profileId, rvn, memory) {
     return __awaiter(this, void 0, void 0, function* () {
-        let profile = yield profiles_1.default.findOne({ accountId: accountId });
-        if (!profile) {
-            profile = yield profileman_1.default.createProfile(accountId);
+        let profiles = yield profiles_1.default.findOne({ accountId: accountId });
+        if (!profiles) {
+            console.log(`Profile for accountId ${accountId} not found. Creating a new one.`);
+            profiles = yield profileman_1.default.createProfile(accountId);
+            if (!profiles) {
+                throw new Error("Failed to create a new profile");
+            }
         }
-        const profileData = yield profileman_1.default.getProfile(profileId, accountId);
-        if (!profileData) {
+        const profile = profiles.profiles[profileId];
+        if (!profile) {
+            console.error(`Profile with ID ${profileId} for accountId ${accountId} not found.`);
             return {
-                error: "arcane.errors.profile.not_found"
+                error: "arcane.errors.profile.not_found",
             };
         }
-        profileman_1.default.updateProfileRvn(rvn, profileId, accountId);
-        return profileData;
+        if (profile.rvn == profile.commandRevision) {
+            profile.rvn += 1;
+            if (profileId == "athena") {
+                if (!profile.stats.attributes.last_applied_loadout)
+                    profile.stats.attributes.last_applied_loadout = profile.stats.attributes.loadouts[0];
+            }
+            yield profiles.updateOne({ $set: { [`profiles.${profileId}`]: profile } });
+        }
+        if (profileId == "athena")
+            profile.stats.attributes.season_num = memory.season;
+        let multiUpdate = [];
+        let ApplyProfileChanges = [];
+        let BaseRevision = profile.rvn;
+        let ProfileRevisionCheck = (memory.build >= 12.20) ? profile.commandRevision : profile.rvn;
+        let QueryRevision = rvn || -1;
+        try {
+            if ((profileId == "common_core") && global.giftReceived[accountId]) {
+                global.giftReceived[accountId] = false;
+                let athena = profiles.profiles["athena"];
+                multiUpdate = [{
+                        "profileRevision": athena.rvn || 0,
+                        "profileId": "athena",
+                        "profileChangesBaseRevision": athena.rvn || 0,
+                        "profileChanges": [{
+                                "changeType": "fullProfileUpdate",
+                                "profile": athena
+                            }],
+                        "profileCommandRevision": athena.commandRevision || 0,
+                    }];
+            }
+        }
+        catch (_a) { }
+        if (QueryRevision != ProfileRevisionCheck) {
+            ApplyProfileChanges = [{
+                    "changeType": "fullProfileUpdate",
+                    "profile": profile
+                }];
+        }
+        const data = {
+            profileRevision: profile.rvn || 0,
+            profileId: profileId,
+            profileChangesBaseRevision: profile.rvn || 0,
+            profileChanges: ApplyProfileChanges,
+            profileCommandRevision: profile.commandRevision || 0,
+            serverTime: new Date().toISOString(),
+            multiUpdate: multiUpdate,
+            responseVersion: 1,
+        };
+        return data;
     });
 }
 exports.default = {
-    QueryProfile
+    QueryProfile,
 };

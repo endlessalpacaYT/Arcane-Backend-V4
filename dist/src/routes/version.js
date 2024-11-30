@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.versionRoutes = versionRoutes;
+const functions_1 = __importDefault(require("../utils/functions"));
 function versionRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
         fastify.get('/fortnite/api/v2/versioncheck', (request, reply) => {
@@ -23,6 +27,19 @@ function versionRoutes(fastify) {
             });
         });
         fastify.get("/fortnite/api/calendar/v1/timeline", (request, reply) => {
+            const memory = functions_1.default.GetVersionInfo(request);
+            let activeEvents = [
+                {
+                    "eventType": `EventFlag.Season${memory.season}`,
+                    "activeUntil": "9999-01-01T00:00:00.000Z",
+                    "activeSince": "2020-01-01T00:00:00.000Z"
+                },
+                {
+                    "eventType": `EventFlag.${memory.lobby}`,
+                    "activeUntil": "9999-01-01T00:00:00.000Z",
+                    "activeSince": "2020-01-01T00:00:00.000Z"
+                }
+            ];
             return reply.status(200).send({
                 channels: {
                     "client-matchmaking": {
@@ -32,12 +49,12 @@ function versionRoutes(fastify) {
                     "client-events": {
                         states: [{
                                 validFrom: "0001-01-01T00:00:00.000Z",
-                                activeEvents: [],
+                                activeEvents: activeEvents,
                                 state: {
                                     activeStorefronts: [],
                                     eventNamedWeights: {},
-                                    seasonNumber: 3.5,
-                                    seasonTemplateId: `AthenaSeason:athenaseason12`,
+                                    seasonNumber: memory.season,
+                                    seasonTemplateId: `AthenaSeason:athenaseason${memory.season}`,
                                     matchXpBonusPoints: 0,
                                     seasonBegin: "2020-01-01T00:00:00Z",
                                     seasonEnd: "9999-01-01T00:00:00Z",

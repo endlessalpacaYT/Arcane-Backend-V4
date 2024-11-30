@@ -7,4 +7,8 @@ export async function contentRoutes(fastify: FastifyInstance) {
             code: 200
         })
     })
+
+    fastify.get('/fortnite/api/game/v2/world/info', (request, reply) => {
+        reply.status(200).send({});
+    })
 }

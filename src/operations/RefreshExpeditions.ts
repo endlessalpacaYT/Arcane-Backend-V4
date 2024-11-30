@@ -10,7 +10,7 @@ interface Memory {
     lobby: string;
 }
 
-async function ClientQuestLogin(accountId: string, profileId: string, rvn: number, memory: Memory) {
+async function RefreshExpeditions(accountId: string, profileId: string, rvn: number, memory: Memory) {
     let profiles: any = await Profiles.findOne({ accountId: accountId });
     if (!profiles) {
         console.log(
@@ -31,6 +31,11 @@ async function ClientQuestLogin(accountId: string, profileId: string, rvn: numbe
         return {
             error: "arcane.errors.profile.not_found",
         };
+    }
+
+    if (profile.rvn == profile.commandRevision) {
+        profile.rvn += 1;
+        await profiles.updateOne({ $set: { [`profiles.${profileId}`]: profile } });
     }
 
     let multiUpdate = [];
@@ -61,5 +66,5 @@ async function ClientQuestLogin(accountId: string, profileId: string, rvn: numbe
 }
 
 export default {
-    ClientQuestLogin
+    RefreshExpeditions
 }

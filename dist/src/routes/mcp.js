@@ -13,9 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mcpRoutes = mcpRoutes;
-const Fallback_1 = __importDefault(require("../operations/Fallback"));
+const functions_1 = __importDefault(require("../utils/functions"));
 const QueryProfile_1 = __importDefault(require("../operations/QueryProfile"));
 const ClientQuestLogin_1 = __importDefault(require("../operations/ClientQuestLogin"));
+const SetHardcoreModifier_1 = __importDefault(require("../operations/SetHardcoreModifier"));
+const RefreshExpeditions_1 = __importDefault(require("../operations/RefreshExpeditions"));
+const SetCosmeticLockerBanner_1 = __importDefault(require("../operations/SetCosmeticLockerBanner"));
+const Fallback_1 = __importDefault(require("../operations/Fallback"));
 const athena = require("../responses/DefaultProfiles/athena.json");
 const common_public = require("../responses/DefaultProfiles/common_public.json");
 const common_core = require("../responses/DefaultProfiles/common_core.json");
@@ -25,7 +29,8 @@ function mcpRoutes(fastify) {
             try {
                 const { accountId } = request.params;
                 const { profileId, rvn } = request.query;
-                const queryProfile = yield QueryProfile_1.default.QueryProfile(accountId, profileId, Number(rvn));
+                const memory = functions_1.default.GetVersionInfo(request);
+                const queryProfile = yield QueryProfile_1.default.QueryProfile(accountId, profileId, Number(rvn), memory);
                 return reply.status(200).send(queryProfile);
             }
             catch (err) {
@@ -39,8 +44,56 @@ function mcpRoutes(fastify) {
             try {
                 const { accountId } = request.params;
                 const { profileId, rvn } = request.query;
-                const clientQuestLogin = yield ClientQuestLogin_1.default.ClientQuestLogin(accountId, profileId, Number(rvn));
+                const memory = functions_1.default.GetVersionInfo(request);
+                const clientQuestLogin = yield ClientQuestLogin_1.default.ClientQuestLogin(accountId, profileId, Number(rvn), memory);
                 return reply.status(200).send({ clientQuestLogin });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/SetHardcoreModifier', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const memory = functions_1.default.GetVersionInfo(request);
+                const setHardcoreModifier = yield SetHardcoreModifier_1.default.SetHardcoreModifier(accountId, profileId, Number(rvn), memory);
+                return reply.status(200).send({ setHardcoreModifier });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/RefreshExpeditions', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const memory = functions_1.default.GetVersionInfo(request);
+                const refreshExpeditions = yield RefreshExpeditions_1.default.RefreshExpeditions(accountId, profileId, Number(rvn), memory);
+                return reply.status(200).send({ refreshExpeditions });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/SetCosmeticLockerBanner', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                console.log(request.query);
+                console.log(request.body);
+                const memory = functions_1.default.GetVersionInfo(request);
+                const setCosmeticLockerBanner = yield SetCosmeticLockerBanner_1.default.SetCosmeticLockerBanner(accountId, profileId, Number(rvn), request.body, memory);
+                return reply.status(200).send({ setCosmeticLockerBanner });
             }
             catch (err) {
                 console.error(err);

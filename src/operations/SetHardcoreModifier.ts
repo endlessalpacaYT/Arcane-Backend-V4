@@ -10,7 +10,7 @@ interface Memory {
     lobby: string;
 }
 
-async function ClientQuestLogin(accountId: string, profileId: string, rvn: number, memory: Memory) {
+async function SetHardcoreModifier(accountId: string, profileId: string, rvn: number, memory: Memory) {
     let profiles: any = await Profiles.findOne({ accountId: accountId });
     if (!profiles) {
         console.log(
@@ -61,5 +61,5 @@ async function ClientQuestLogin(accountId: string, profileId: string, rvn: numbe
 }
 
 export default {
-    ClientQuestLogin
+    SetHardcoreModifier
 }

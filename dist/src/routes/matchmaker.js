@@ -9,17 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.contentRoutes = contentRoutes;
-function contentRoutes(fastify) {
+exports.matchmaker = matchmaker;
+function matchmaker(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
-        fastify.get('/content/api/pages/fortnite-game', (request, reply) => {
-            return reply.status(200).send({
-                status: "OK",
-                code: 200
-            });
-        });
-        fastify.get('/fortnite/api/game/v2/world/info', (request, reply) => {
-            reply.status(200).send({});
+        fastify.get('/fortnite/api/matchmaking/session/findPlayer/:accountId', (request, reply) => {
+            reply.status(204).send({});
         });
     });
 }

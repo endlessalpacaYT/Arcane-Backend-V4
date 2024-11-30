@@ -96,4 +96,17 @@ export async function accountRoutes(fastify: FastifyInstance) {
     fastify.get('/fortnite/api/game/v2/privacy/account/:accountId', (request, reply) => {
         return reply.status(200).send([])
     })
+
+    fastify.get('/fortnite/api/game/v2/twitch/:accountId', (request, reply) => {
+        reply.status(200).send();
+    })
+
+    fastify.get("/account/api/epicdomains/ssodomains", async (request, reply) => {
+        reply.status(200).send([
+            "unrealengine.com",
+            "unrealtournament.com",
+            "fortnite.com",
+            "epicgames.com"
+        ])
+    })
 }

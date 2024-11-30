@@ -14,6 +14,12 @@ export async function versionRoutes(fastify: FastifyInstance) {
         })
     })
 
+    fastify.get('/fortnite/api/versioncheck', (request, reply) => {
+        return reply.status(200).send({
+            type: "NO_UPDATE"
+        })
+    })
+
     interface Memory {
         season: number;
         build: number;

@@ -10,6 +10,7 @@ import ClientQuestLogin from "../operations/ClientQuestLogin";
 import SetHardcoreModifier from "../operations/SetHardcoreModifier";
 import RefreshExpeditions from "../operations/RefreshExpeditions";
 import SetCosmeticLockerBanner from "../operations/SetCosmeticLockerBanner";
+import SetBattleRoyaleBanner from "../operations/SetBattleRoyaleBanner";
 import Fallback from '../operations/Fallback';
 
 const athena = require("../responses/DefaultProfiles/athena.json")
@@ -101,12 +102,33 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         try {
             const { accountId } = request.params;
             const { profileId, rvn } = request.query;
-            console.log(request.query);
-            console.log(request.body);
 
             const memory = functions.GetVersionInfo(request);
             const setCosmeticLockerBanner = await SetCosmeticLockerBanner.SetCosmeticLockerBanner(accountId, profileId, Number(rvn), request.body, memory);
             return reply.status(200).send({setCosmeticLockerBanner})
+        } catch (err) {
+            console.error(err);
+            return reply.status(500).send({
+                error: "SERVER ERROR"
+            });
+        }
+    })
+
+    interface SetBattleRoyaleBanner {
+        homebaseBannerIconId: string;
+        homebaseBannerColorId: string;
+    }
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/SetBattleRoyaleBanner', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile, Body: SetBattleRoyaleBanner }>, reply: FastifyReply) => {
+        try {
+            const { accountId } = request.params;
+            const { profileId, rvn } = request.query;
+            console.log(request.query);
+            console.log(request.body);
+
+            const memory = functions.GetVersionInfo(request);
+            const setBattleRoyaleBanner = await SetBattleRoyaleBanner.SetBattleRoyaleBanner(accountId, profileId, Number(rvn), request.body, memory);
+            return reply.status(200).send({setBattleRoyaleBanner})
         } catch (err) {
             console.error(err);
             return reply.status(500).send({

@@ -11,12 +11,11 @@ interface Memory {
 }
 
 interface Body {
-    lockerItem: string,
-    bannerIconTemplateName: string,
-    bannerColorTemplateName: string
+    homebaseBannerIconId: string;
+    homebaseBannerColorId: string;
 }
 
-async function SetCosmeticLockerBanner(accountId: string, profileId: string, rvn: number, body: Body, memory: Memory) {
+async function SetBattleRoyaleBanner(accountId: string, profileId: string, rvn: number, body: Body, memory: Memory) {
     let profiles: any = await Profiles.findOne({ accountId: accountId });
     if (!profiles) {
         console.log(
@@ -45,24 +44,26 @@ async function SetCosmeticLockerBanner(accountId: string, profileId: string, rvn
     let ProfileRevisionCheck = (memory.build >= 12.20) ? profile.commandRevision : profile.rvn;
     let QueryRevision = rvn || -1;
 
-    profile.stats.attributes.banner_icon = body.bannerIconTemplateName;
-    profile.stats.attributes.banner_color = body.bannerColorTemplateName;
+    let activeLoadout = profile.stats.attributes.loadouts[profile.stats.attributes.active_loadout_index];
 
-    profile.items[body.lockerItem].attributes.banner_icon_template = body.bannerIconTemplateName;
-    profile.items[body.lockerItem].attributes.banner_color_template = body.bannerColorTemplateName;
+    profile.stats.attributes.banner_icon = body.homebaseBannerIconId;
+    profile.stats.attributes.banner_color = body.homebaseBannerColorId;
+
+    profile.items[activeLoadout].attributes.banner_icon_template = body.homebaseBannerIconId;
+    profile.items[activeLoadout].attributes.banner_color_template = body.homebaseBannerColorId;
 
     ApplyProfileChanges.push({
         "changeType": "itemAttrChanged",
-        "itemId": body.lockerItem,
+        "itemId": activeLoadout,
         "attributeName": "banner_icon_template",
-        "attributeValue": profile.items[body.lockerItem].attributes.banner_icon_template
+        "attributeValue": profile.items[activeLoadout].attributes.banner_icon_template
     });
 
     ApplyProfileChanges.push({
         "changeType": "itemAttrChanged",
-        "itemId": body.lockerItem,
+        "itemId": activeLoadout,
         "attributeName": "banner_color_template",
-        "attributeValue": profile.items[body.lockerItem].attributes.banner_color_template
+        "attributeValue": profile.items[activeLoadout].attributes.banner_color_template
     });
 
     if (ApplyProfileChanges.length > 0) {
@@ -95,5 +96,5 @@ async function SetCosmeticLockerBanner(accountId: string, profileId: string, rvn
 }
 
 export default {
-    SetCosmeticLockerBanner
+    SetBattleRoyaleBanner
 }

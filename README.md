@@ -44,7 +44,7 @@
 - [ ] Tournament support
 - [ ] Save The World
 
-## Bot Commands  
+## Bot Commands (NOTE: BOT IS DEPRECATED!)
 - [x] Register command (for creating new accounts)  
 - [x] Ping command (for checking bot responsiveness)  
 - [x] User lookup command (check user stats and profile)  

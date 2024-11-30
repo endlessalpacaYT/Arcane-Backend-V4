@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const profileman_1 = __importDefault(require("../utils/user/profileman"));
 const profiles_1 = __importDefault(require("../database/models/profiles"));
-function SetCosmeticLockerBanner(accountId, profileId, rvn, body, memory) {
+function SetBattleRoyaleBanner(accountId, profileId, rvn, body, memory) {
     return __awaiter(this, void 0, void 0, function* () {
         let profiles = yield profiles_1.default.findOne({ accountId: accountId });
         if (!profiles) {
@@ -36,21 +36,22 @@ function SetCosmeticLockerBanner(accountId, profileId, rvn, body, memory) {
         let BaseRevision = profile.rvn;
         let ProfileRevisionCheck = (memory.build >= 12.20) ? profile.commandRevision : profile.rvn;
         let QueryRevision = rvn || -1;
-        profile.stats.attributes.banner_icon = body.bannerIconTemplateName;
-        profile.stats.attributes.banner_color = body.bannerColorTemplateName;
-        profile.items[body.lockerItem].attributes.banner_icon_template = body.bannerIconTemplateName;
-        profile.items[body.lockerItem].attributes.banner_color_template = body.bannerColorTemplateName;
+        let activeLoadout = profile.stats.attributes.loadouts[profile.stats.attributes.active_loadout_index];
+        profile.stats.attributes.banner_icon = body.homebaseBannerIconId;
+        profile.stats.attributes.banner_color = body.homebaseBannerColorId;
+        profile.items[activeLoadout].attributes.banner_icon_template = body.homebaseBannerIconId;
+        profile.items[activeLoadout].attributes.banner_color_template = body.homebaseBannerColorId;
         ApplyProfileChanges.push({
             "changeType": "itemAttrChanged",
-            "itemId": body.lockerItem,
+            "itemId": activeLoadout,
             "attributeName": "banner_icon_template",
-            "attributeValue": profile.items[body.lockerItem].attributes.banner_icon_template
+            "attributeValue": profile.items[activeLoadout].attributes.banner_icon_template
         });
         ApplyProfileChanges.push({
             "changeType": "itemAttrChanged",
-            "itemId": body.lockerItem,
+            "itemId": activeLoadout,
             "attributeName": "banner_color_template",
-            "attributeValue": profile.items[body.lockerItem].attributes.banner_color_template
+            "attributeValue": profile.items[activeLoadout].attributes.banner_color_template
         });
         if (ApplyProfileChanges.length > 0) {
             profile.rvn += 1;
@@ -78,5 +79,5 @@ function SetCosmeticLockerBanner(accountId, profileId, rvn, body, memory) {
     });
 }
 exports.default = {
-    SetCosmeticLockerBanner
+    SetBattleRoyaleBanner
 };

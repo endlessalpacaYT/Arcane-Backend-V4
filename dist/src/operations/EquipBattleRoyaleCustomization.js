@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const profileman_1 = __importDefault(require("../utils/user/profileman"));
 const profiles_1 = __importDefault(require("../database/models/profiles"));
-function SetCosmeticLockerBanner(accountId, profileId, rvn, body, memory) {
+function EquipBattleRoyaleCustomization(accountId, profileId, rvn, body, memory) {
     return __awaiter(this, void 0, void 0, function* () {
         let profiles = yield profiles_1.default.findOne({ accountId: accountId });
         if (!profiles) {
@@ -36,22 +36,34 @@ function SetCosmeticLockerBanner(accountId, profileId, rvn, body, memory) {
         let BaseRevision = profile.rvn;
         let ProfileRevisionCheck = (memory.build >= 12.20) ? profile.commandRevision : profile.rvn;
         let QueryRevision = rvn || -1;
-        profile.stats.attributes.banner_icon = body.bannerIconTemplateName;
-        profile.stats.attributes.banner_color = body.bannerColorTemplateName;
-        profile.items[body.lockerItem].attributes.banner_icon_template = body.bannerIconTemplateName;
-        profile.items[body.lockerItem].attributes.banner_color_template = body.bannerColorTemplateName;
-        ApplyProfileChanges.push({
-            "changeType": "itemAttrChanged",
-            "itemId": body.lockerItem,
-            "attributeName": "banner_icon_template",
-            "attributeValue": profile.items[body.lockerItem].attributes.banner_icon_template
-        });
-        ApplyProfileChanges.push({
-            "changeType": "itemAttrChanged",
-            "itemId": body.lockerItem,
-            "attributeName": "banner_color_template",
-            "attributeValue": profile.items[body.lockerItem].attributes.banner_color_template
-        });
+        let activeLoadout = profile.stats.attributes.loadouts[profile.stats.attributes.active_loadout_index];
+        if (body.slotName == "Dance") {
+            profile.stats.attributes.favorite_dance[body.indexWithinSlot] = body.itemToSlot;
+            profile.items[activeLoadout].attributes.locker_slots_data.slots.Dance.items[body.indexWithinSlot] = body.itemToSlot;
+            ApplyProfileChanges.push({
+                "changeType": "statModified",
+                "name": "favorite_dance",
+                "value": profile.stats.attributes["favorite_dance"]
+            });
+        }
+        else if (body.slotName == "ItemWrap") {
+            profile.stats.attributes.favorite_itemwraps[body.indexWithinSlot] = body.itemToSlot;
+            profile.items[activeLoadout].attributes.locker_slots_data.slots.ItemWrap.items[body.indexWithinSlot] = body.itemToSlot;
+            ApplyProfileChanges.push({
+                "changeType": "statModified",
+                "name": "favorite_itemwraps",
+                "value": profile.stats.attributes["favorite_itemwraps"]
+            });
+        }
+        else {
+            profile.stats.attributes[(`favorite_${body.slotName}`).toLowerCase()] = body.itemToSlot;
+            profile.items[activeLoadout].attributes.locker_slots_data.slots[body.slotName].items = body.itemToSlot;
+            ApplyProfileChanges.push({
+                "changeType": "statModified",
+                "name": (`favorite_${body.slotName}`).toLowerCase(),
+                "value": profile.stats.attributes[(`favorite_${body.slotName}`).toLowerCase()]
+            });
+        }
         if (ApplyProfileChanges.length > 0) {
             profile.rvn += 1;
             profile.commandRevision += 1;
@@ -78,5 +90,5 @@ function SetCosmeticLockerBanner(accountId, profileId, rvn, body, memory) {
     });
 }
 exports.default = {
-    SetCosmeticLockerBanner
+    EquipBattleRoyaleCustomization
 };

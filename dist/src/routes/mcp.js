@@ -19,6 +19,8 @@ const ClientQuestLogin_1 = __importDefault(require("../operations/ClientQuestLog
 const SetHardcoreModifier_1 = __importDefault(require("../operations/SetHardcoreModifier"));
 const RefreshExpeditions_1 = __importDefault(require("../operations/RefreshExpeditions"));
 const SetCosmeticLockerBanner_1 = __importDefault(require("../operations/SetCosmeticLockerBanner"));
+const SetBattleRoyaleBanner_1 = __importDefault(require("../operations/SetBattleRoyaleBanner"));
+const EquipBattleRoyaleCustomization_1 = __importDefault(require("../operations/EquipBattleRoyaleCustomization"));
 const Fallback_1 = __importDefault(require("../operations/Fallback"));
 const athena = require("../responses/DefaultProfiles/athena.json");
 const common_public = require("../responses/DefaultProfiles/common_public.json");
@@ -89,11 +91,41 @@ function mcpRoutes(fastify) {
             try {
                 const { accountId } = request.params;
                 const { profileId, rvn } = request.query;
-                console.log(request.query);
-                console.log(request.body);
                 const memory = functions_1.default.GetVersionInfo(request);
                 const setCosmeticLockerBanner = yield SetCosmeticLockerBanner_1.default.SetCosmeticLockerBanner(accountId, profileId, Number(rvn), request.body, memory);
                 return reply.status(200).send({ setCosmeticLockerBanner });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/SetBattleRoyaleBanner', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const memory = functions_1.default.GetVersionInfo(request);
+                const setBattleRoyaleBanner = yield SetBattleRoyaleBanner_1.default.SetBattleRoyaleBanner(accountId, profileId, Number(rvn), request.body, memory);
+                return reply.status(200).send({ setBattleRoyaleBanner });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/EquipBattleRoyaleCustomization', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                console.log(request.query);
+                console.log(request.body);
+                const memory = functions_1.default.GetVersionInfo(request);
+                const equipBattleRoyaleCustomization = yield EquipBattleRoyaleCustomization_1.default.EquipBattleRoyaleCustomization(accountId, profileId, Number(rvn), request.body, memory);
+                return reply.status(200).send({ equipBattleRoyaleCustomization });
             }
             catch (err) {
                 console.error(err);

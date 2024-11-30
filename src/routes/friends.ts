@@ -28,4 +28,8 @@ export async function friendRoutes(fastify: FastifyInstance) {
     fastify.get('/friends/api/public/list/fortnite/:accountId/recentPlayers', (request, reply) => {
         return reply.status(200).send([])
     })
+
+    fastify.get('/fortnite/api/game/v2/friendcodes/:accountId/epic', (request, reply) => {
+        return reply.status(200).send([])
+    })
 }

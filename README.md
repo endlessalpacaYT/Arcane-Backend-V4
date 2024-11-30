@@ -1,6 +1,11 @@
 # Arcane-Backend-V4  
 ## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
 
+## Tested Builds:
+### [ 5.40 ]
+## Fully Supported Builds:
+### []
+
 ## Project Stack: (Will Most Likely Change)
 - Language: Typescript
 

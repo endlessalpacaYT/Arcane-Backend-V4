@@ -1,6 +1,7 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 
 import profileman from "../utils/user/profileman";
+import functions from "../utils/functions";
 
 import User from "../database/models/user";
 
@@ -27,9 +28,9 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         try {
             const { accountId } = request.params;
             const { profileId, rvn } = request.query;
-            console.log(request.body);
 
-            const queryProfile = await QueryProfile.QueryProfile(accountId, profileId, Number(rvn));
+            const memory = functions.GetVersionInfo(request);
+            const queryProfile = await QueryProfile.QueryProfile(accountId, profileId, Number(rvn), memory);
             return reply.status(200).send(queryProfile);
         } catch (err) {
             console.error(err);
@@ -43,7 +44,10 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         try {
             const { accountId } = request.params;
             const { profileId, rvn } = request.query;
+            console.log(request.query);
+            console.log(request.body);
 
+            const memory = functions.GetVersionInfo(request);
             const clientQuestLogin = await ClientQuestLogin.ClientQuestLogin(accountId, profileId, Number(rvn));
             return reply.status(200).send({clientQuestLogin})
         } catch (err) {
@@ -58,7 +62,6 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         try {
             const { accountId, operation } = request.params;
             const { profileId, rvn } = request.query;
-            console.log(request.body);
 
             console.warn(`Operation ${operation} is not supported`);
             const fallback = await Fallback.Fallback(accountId, profileId, Number(rvn));

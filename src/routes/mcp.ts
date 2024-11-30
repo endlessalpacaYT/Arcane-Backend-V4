@@ -11,6 +11,7 @@ import SetHardcoreModifier from "../operations/SetHardcoreModifier";
 import RefreshExpeditions from "../operations/RefreshExpeditions";
 import SetCosmeticLockerBanner from "../operations/SetCosmeticLockerBanner";
 import SetBattleRoyaleBanner from "../operations/SetBattleRoyaleBanner";
+import EquipBattleRoyaleCustomization from "../operations/EquipBattleRoyaleCustomization";
 import Fallback from '../operations/Fallback';
 
 const athena = require("../responses/DefaultProfiles/athena.json")
@@ -123,12 +124,35 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         try {
             const { accountId } = request.params;
             const { profileId, rvn } = request.query;
-            console.log(request.query);
-            console.log(request.body);
 
             const memory = functions.GetVersionInfo(request);
             const setBattleRoyaleBanner = await SetBattleRoyaleBanner.SetBattleRoyaleBanner(accountId, profileId, Number(rvn), request.body, memory);
             return reply.status(200).send({setBattleRoyaleBanner})
+        } catch (err) {
+            console.error(err);
+            return reply.status(500).send({
+                error: "SERVER ERROR"
+            });
+        }
+    })
+
+    interface EquipBattleRoyaleCustomization {
+        slotName: string;
+        itemToSlot: string;
+        indexWithinSlot: number;
+        variantUpdates: Array<any>;
+    }
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/EquipBattleRoyaleCustomization', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile, Body: EquipBattleRoyaleCustomization }>, reply: FastifyReply) => {
+        try {
+            const { accountId } = request.params;
+            const { profileId, rvn } = request.query;
+            console.log(request.query);
+            console.log(request.body);
+
+            const memory = functions.GetVersionInfo(request);
+            const equipBattleRoyaleCustomization = await EquipBattleRoyaleCustomization.EquipBattleRoyaleCustomization(accountId, profileId, Number(rvn), request.body, memory);
+            return reply.status(200).send({equipBattleRoyaleCustomization})
         } catch (err) {
             console.error(err);
             return reply.status(500).send({

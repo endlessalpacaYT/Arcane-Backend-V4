@@ -15,9 +15,14 @@ function bot(...args: any[]) {
     formatMessage(33, "[BOT]", ...args);  
 }
 
+function xmpp(...args: any[]) {
+    formatMessage(34, "[XMPP]", ...args);  
+}
+
 export default {
     formatMessage,
     backend,
     database,
-    bot
+    bot,
+    xmpp
 }

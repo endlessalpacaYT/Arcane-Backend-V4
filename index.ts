@@ -50,6 +50,7 @@ async function startBackend() {
   logger.backend(`Welcome To Arcane!`);
   console.log("");
   startHTTPServer();
+  require("./src/xmpp/main");
   await database.connectDB(MONGO_URI);
   if (process.env.BOT_ENABLED == "true") {
     discord();

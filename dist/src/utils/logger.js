@@ -13,9 +13,13 @@ function database(...args) {
 function bot(...args) {
     formatMessage(33, "[BOT]", ...args);
 }
+function xmpp(...args) {
+    formatMessage(34, "[XMPP]", ...args);
+}
 exports.default = {
     formatMessage,
     backend,
     database,
-    bot
+    bot,
+    xmpp
 };

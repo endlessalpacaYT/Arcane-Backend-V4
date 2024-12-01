@@ -53,6 +53,7 @@ function startBackend() {
         logger_1.default.backend(`Welcome To Arcane!`);
         console.log("");
         startHTTPServer();
+        require("./src/xmpp/main");
         yield connect_1.default.connectDB(MONGO_URI);
         if (process.env.BOT_ENABLED == "true") {
             (0, index_1.default)();

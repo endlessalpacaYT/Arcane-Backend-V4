@@ -53,7 +53,7 @@
 - [x] Ping command (for checking bot responsiveness)  
 - [x] User lookup command (check user stats and profile)  
 - [x] Ban management command (ban/unban users)  
-- [ ] Announcements command (send announcements to users)
+- [x] Announcements command (send announcements to users)
 
 ## Contributing Guide
 

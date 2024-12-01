@@ -2,12 +2,14 @@
 ## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
 
 ## Fully Supported Builds:
-### [ 1.7.2 - 2.4.2 ]
+### [ 1.7.2 - 3.1 ]
 ## Build Specific Issues:
 ### Season 1:
 - 1.7.2 - 1.10 | Cannot connect to xmpp and cannot use matchmaker
 ### Season 2:
-- 1.11 - 2.4.2 | Cannot connect to xmpp and cannot use matchmaker
+- 1.11 - 2.5 | Cannot connect to xmpp and cannot use matchmaker
+### Season 3:
+- 3.0 - 3.1 | Cannot connect to xmpp and cannot use matchmaker
 
 ## Project Stack: (Will Most Likely Change)
 - Language: Typescript

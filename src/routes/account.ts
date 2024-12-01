@@ -109,4 +109,8 @@ export async function accountRoutes(fastify: FastifyInstance) {
             "epicgames.com"
         ])
     })
+
+    fastify.post('/fulfillment/api/public/accounts/:accountId/codes/:code', (request, reply) => {
+        reply.status(200).send();
+    })
 }

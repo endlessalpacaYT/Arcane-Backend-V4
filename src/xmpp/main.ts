@@ -46,8 +46,9 @@ app.get("/clients", (req: Request, res: Response) => {
 
 wss.on("connection", (ws: WebSocket) => {
     console.log("A new client connected.");
-    ws.on("message", (message: string) => {
-        console.log("Received:", message);
+    ws.on("message", (message: Buffer) => {
+        const decryptedMessage = message.toString();
+        console.log("Received:", decryptedMessage);
     });
 
     ws.on("close", () => {

@@ -2,6 +2,9 @@
 IP=0.0.0.0
 PORT=3551
 
+# Matchmaker Settings:
+MATCHMAKER_URL=127.0.0.1:8080
+
 # Database Settings
 MONGO_URI=mongodb://localhost:27017/ArcaneV4
 

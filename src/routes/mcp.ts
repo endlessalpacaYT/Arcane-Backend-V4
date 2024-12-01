@@ -12,6 +12,8 @@ import RefreshExpeditions from "../operations/RefreshExpeditions";
 import SetCosmeticLockerBanner from "../operations/SetCosmeticLockerBanner";
 import SetBattleRoyaleBanner from "../operations/SetBattleRoyaleBanner";
 import EquipBattleRoyaleCustomization from "../operations/EquipBattleRoyaleCustomization";
+import GetMcpTimeForLogin from "../operations/GetMcpTimeForLogin";
+import IncrementNamedCounterStat from "../operations/IncrementNamedCounterStat";
 import Fallback from '../operations/Fallback';
 
 const athena = require("../responses/DefaultProfiles/athena.json")
@@ -147,12 +149,46 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         try {
             const { accountId } = request.params;
             const { profileId, rvn } = request.query;
-            console.log(request.query);
-            console.log(request.body);
 
             const memory = functions.GetVersionInfo(request);
             const equipBattleRoyaleCustomization = await EquipBattleRoyaleCustomization.EquipBattleRoyaleCustomization(accountId, profileId, Number(rvn), request.body, memory);
             return reply.status(200).send({equipBattleRoyaleCustomization})
+        } catch (err) {
+            console.error(err);
+            return reply.status(500).send({
+                error: "SERVER ERROR"
+            });
+        }
+    })
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/GetMcpTimeForLogin', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile }>, reply: FastifyReply) => {
+        try {
+            const { accountId } = request.params;
+            const { profileId, rvn } = request.query;
+
+            const memory = functions.GetVersionInfo(request);
+            const getMcpTimeForLogin = await GetMcpTimeForLogin.GetMcpTimeForLogin(accountId, profileId, Number(rvn), memory);
+            return reply.status(200).send({getMcpTimeForLogin})
+        } catch (err) {
+            console.error(err);
+            return reply.status(500).send({
+                error: "SERVER ERROR"
+            });
+        }
+    })
+
+    interface IncrementNamedCounterStat {
+        counterName: string;
+    }
+
+    fastify.post('/fortnite/api/game/v2/profile/:accountId/client/IncrementNamedCounterStat', async (request: FastifyRequest<{ Params: operationParams, Querystring: profile, Body: IncrementNamedCounterStat }>, reply: FastifyReply) => {
+        try {
+            const { accountId } = request.params;
+            const { profileId, rvn } = request.query;
+
+            const memory = functions.GetVersionInfo(request);
+            const incrementNamedCounterStat = await IncrementNamedCounterStat.IncrementNamedCounterStat(accountId, profileId, Number(rvn), memory, request.body);
+            return reply.status(200).send({incrementNamedCounterStat})
         } catch (err) {
             console.error(err);
             return reply.status(500).send({

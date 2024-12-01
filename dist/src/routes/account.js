@@ -92,5 +92,16 @@ function accountRoutes(fastify) {
         fastify.get('/fortnite/api/game/v2/privacy/account/:accountId', (request, reply) => {
             return reply.status(200).send([]);
         });
+        fastify.get('/fortnite/api/game/v2/twitch/:accountId', (request, reply) => {
+            reply.status(200).send();
+        });
+        fastify.get("/account/api/epicdomains/ssodomains", (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            reply.status(200).send([
+                "unrealengine.com",
+                "unrealtournament.com",
+                "fortnite.com",
+                "epicgames.com"
+            ]);
+        }));
     });
 }

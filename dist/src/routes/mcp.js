@@ -21,6 +21,8 @@ const RefreshExpeditions_1 = __importDefault(require("../operations/RefreshExped
 const SetCosmeticLockerBanner_1 = __importDefault(require("../operations/SetCosmeticLockerBanner"));
 const SetBattleRoyaleBanner_1 = __importDefault(require("../operations/SetBattleRoyaleBanner"));
 const EquipBattleRoyaleCustomization_1 = __importDefault(require("../operations/EquipBattleRoyaleCustomization"));
+const GetMcpTimeForLogin_1 = __importDefault(require("../operations/GetMcpTimeForLogin"));
+const IncrementNamedCounterStat_1 = __importDefault(require("../operations/IncrementNamedCounterStat"));
 const Fallback_1 = __importDefault(require("../operations/Fallback"));
 const athena = require("../responses/DefaultProfiles/athena.json");
 const common_public = require("../responses/DefaultProfiles/common_public.json");
@@ -121,11 +123,39 @@ function mcpRoutes(fastify) {
             try {
                 const { accountId } = request.params;
                 const { profileId, rvn } = request.query;
-                console.log(request.query);
-                console.log(request.body);
                 const memory = functions_1.default.GetVersionInfo(request);
                 const equipBattleRoyaleCustomization = yield EquipBattleRoyaleCustomization_1.default.EquipBattleRoyaleCustomization(accountId, profileId, Number(rvn), request.body, memory);
                 return reply.status(200).send({ equipBattleRoyaleCustomization });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/GetMcpTimeForLogin', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const memory = functions_1.default.GetVersionInfo(request);
+                const getMcpTimeForLogin = yield GetMcpTimeForLogin_1.default.GetMcpTimeForLogin(accountId, profileId, Number(rvn), memory);
+                return reply.status(200).send({ getMcpTimeForLogin });
+            }
+            catch (err) {
+                console.error(err);
+                return reply.status(500).send({
+                    error: "SERVER ERROR"
+                });
+            }
+        }));
+        fastify.post('/fortnite/api/game/v2/profile/:accountId/client/IncrementNamedCounterStat', (request, reply) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { accountId } = request.params;
+                const { profileId, rvn } = request.query;
+                const memory = functions_1.default.GetVersionInfo(request);
+                const incrementNamedCounterStat = yield IncrementNamedCounterStat_1.default.IncrementNamedCounterStat(accountId, profileId, Number(rvn), memory, request.body);
+                return reply.status(200).send({ incrementNamedCounterStat });
             }
             catch (err) {
                 console.error(err);

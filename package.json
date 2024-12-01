@@ -23,6 +23,7 @@
     "uuid": "^10.0.0"
   },
   "scripts": {
-    "dev": "nodemon --watch src --exec ts-node index.ts"
+    "dev": "nodemon --watch src --exec ts-node index.ts",
+    "prod": "nodemon --exec ts-node index.ts"
   }
 }

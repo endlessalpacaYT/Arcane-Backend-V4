@@ -12,7 +12,8 @@
 ## Features:
 - [x] Login system  
 - [x] Easy setup  
-- [x] Database (MongoDB) 
+- [x] Database (MongoDB)
+- [ ] Cloudstorage
 - [ ] Auto shop (purchasing skins and items)  
 - [ ] Full Battle Pass integration  
 - [ ] Challenges system (daily and weekly challenges)  

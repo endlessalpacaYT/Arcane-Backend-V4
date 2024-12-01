@@ -12,8 +12,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.statsRoutes = statsRoutes;
 function statsRoutes(fastify) {
     return __awaiter(this, void 0, void 0, function* () {
-        fastify.get('/fortnite/api/statsv2/account/:accountId', (request, reply) => {
-            return reply.status(200).send([]);
+        fastify.get("/fortnite/api/statsv2/account/:accountId", (request, reply) => {
+            reply.status(200).send({
+                "startTime": 0,
+                "endTime": 0,
+                "stats": {},
+                "accountId": request.params.accountId
+            });
+        });
+        fastify.get("/statsproxy/api/statsv2/account/:accountId", (request, reply) => {
+            reply.status(200).send({
+                "startTime": 0,
+                "endTime": 0,
+                "stats": {},
+                "accountId": request.params.accountId
+            });
+        });
+        fastify.get("/fortnite/api/stats/accountId/:accountId/bulk/window/alltime", (request, reply) => {
+            reply.status(200).send({
+                "startTime": 0,
+                "endTime": 0,
+                "stats": {},
+                "accountId": request.params.accountId
+            });
         });
     });
 }

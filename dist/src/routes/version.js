@@ -26,6 +26,11 @@ function versionRoutes(fastify) {
                 type: "NO_UPDATE"
             });
         });
+        fastify.get('/fortnite/api/versioncheck', (request, reply) => {
+            return reply.status(200).send({
+                type: "NO_UPDATE"
+            });
+        });
         fastify.get("/fortnite/api/calendar/v1/timeline", (request, reply) => {
             const memory = functions_1.default.GetVersionInfo(request);
             let activeEvents = [

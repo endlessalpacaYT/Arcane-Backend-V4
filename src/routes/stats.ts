@@ -51,4 +51,8 @@ export async function statsRoutes(fastify: FastifyInstance) {
             "playlist": request.query.playlist
         })
     })
+
+    fastify.post("/fortnite/api/leaderboards/type/global/stat/:playlist/window/weekly", async (request: FastifyRequest<{ Params: leaderboards, Querystring: leaderboards }>, reply) => {
+        reply.status(200).send([])
+    })
 }

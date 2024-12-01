@@ -2,12 +2,12 @@
 ## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
 
 ## Tested Builds/Partial Supported Builds:
-### [ 1.7.2, 5.40, 12.40 ]
+### [ 1.7.2 - 1.8, 5.40, 12.40 ]
 ## Fully Supported Builds:
-### [ 1.7.2 ]
+### [ 1.7.2 - 1.8 ]
 ## Build Specific Issues:
 ### Season 1:
-- 1.7.2 | Cannot connect to xmpp and cannot use matchmaker
+- 1.7.2 - 1.8 | Cannot connect to xmpp and cannot use matchmaker
 
 ## Project Stack: (Will Most Likely Change)
 - Language: Typescript
@@ -23,7 +23,7 @@
 - [ ] Friends system (add/remove/block friends)  
 - [ ] XMPP  
 - [x] Working MCP (10%)
-- [ ] NewsV1 (Fortnite in-game news system) 
+- [x] NewsV1 (Fortnite in-game news system) 
 - [ ] NewsV2 (Fortnite in-game news system)  
 - [x] Discord Bot Integration  
 - [ ] Matchmaker (matchmaking system)  
@@ -40,7 +40,7 @@
 - [x] Player inventory management  
 - [ ] Seasonal events (Christmas, Halloween)  
 - [ ] Player stats tracking 
-- [ ] WebSockets for real-time communication
+- [x] WebSockets for real-time communication
 - [ ] IP Bans (ban based on IP address) 
 - [ ] Private lobbies for custom games  
 - [ ] Cross-platform matchmaking  

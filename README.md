@@ -1,5 +1,5 @@
 # Arcane-Backend-V4  
-## A Universal Backend For Old Builds Of Fortnite, This Is The Last One! Aiming To Be 1:1!
+## A Universal Backend For Old Builds Of Fortnite Aiming To Be 1:1!
 
 ## Fully Supported Builds:
 ### [ 1.7.2 - 3.1 ]
